@@ -20,15 +20,24 @@ import {
   StatusBar,
   TouchableOpacity,
 } from 'react-native';
-import {BottomDrawer} from './src/BottomDrawer';
-import {TopDrawer} from './src/TopDrawer';
-import {RightDrawer} from './src/RightDrawer';
-import {LeftDrawer} from './src/LeftDrawer';
+import {BottomDrawer} from './src/Drawers/BottomDrawer';
+import {TopDrawer} from './src/Drawers/TopDrawer';
+import {RightDrawer} from './src/Drawers/RightDrawer';
+import {LeftDrawer} from './src/Drawers/LeftDrawer';
+import {RadioButton} from './src/RadioButton';
+
+type OptionsT = 'enableNonSlideOpen' | 'peekable' | 'backgroundFade';
 
 const App = () => {
   const [initializing, setInitializing] = React.useState(true);
   const [selectedDrawer, setSelectedDrawer] = React.useState('');
+  const [selectedOptions, setSelectedOptions] = React.useState({
+    enableNonSlideOpen: false,
+    peekable: false,
+    backgroundFade: false,
+  });
 
+  // Drawer-related
   const {height, width} = useWindowDimensions();
   const [screenDim, setScreenDim] = React.useState({
     width: 0,
@@ -86,6 +95,7 @@ const App = () => {
           <TopDrawer
             screenDim={screenDim}
             isInitialPeek={isPeek}
+            // NOTE: onDrawerOpen cannot be dynamically modified at runtime
             onDrawerOpen={() => {
               setIsPeek(false);
               setNonSlideOpen(true);
@@ -95,6 +105,7 @@ const App = () => {
               setNonSlideOpen(false);
             }}
             nonSlideOpen={nonSlideOpen}
+            nonSlideOpenEnabled={selectedOptions.enableNonSlideOpen}
           />
         );
       case 'bottom':
@@ -111,6 +122,7 @@ const App = () => {
               setNonSlideOpen(false);
             }}
             nonSlideOpen={nonSlideOpen}
+            nonSlideOpenEnabled={selectedOptions.enableNonSlideOpen}
           />
         );
       case 'left':
@@ -127,6 +139,7 @@ const App = () => {
               setNonSlideOpen(false);
             }}
             nonSlideOpen={nonSlideOpen}
+            nonSlideOpenEnabled={selectedOptions.enableNonSlideOpen}
           />
         );
       case 'right':
@@ -143,6 +156,7 @@ const App = () => {
               setNonSlideOpen(false);
             }}
             nonSlideOpen={nonSlideOpen}
+            nonSlideOpenEnabled={selectedOptions.enableNonSlideOpen}
           />
         );
       default:
@@ -152,30 +166,66 @@ const App = () => {
 
   return (
     <SafeAreaView style={styles.backgroundStyle}>
-      <View style={styles.content}>
+      <View style={[styles.content]}>
         <View style={styles.interactContainer}>
-          <Text>Choose a Drawer</Text>
-          <View style={styles.drawerOptionsContainer}>
-            {['bottom', 'top', 'left', 'right'].map(loc => {
-              return (
-                <TouchableOpacity
-                  key={loc}
-                  style={[
-                    styles.drawerOption,
-                    {
-                      backgroundColor:
-                        loc === selectedDrawer ? 'black' : 'lightgrey',
-                    },
-                  ]}
-                  onPress={() => setSelectedDrawer(loc)}>
-                  <Text
-                    style={{color: loc === selectedDrawer ? 'white' : 'black'}}>
-                    {loc}
-                  </Text>
-                </TouchableOpacity>
-              );
-            })}
+          <View style={styles.chooseDrawerContainer}>
+            <Text>Drawer</Text>
+            <View style={styles.drawerOptionsContainer}>
+              {['bottom', 'top', 'left', 'right'].map(loc => {
+                return (
+                  <TouchableOpacity
+                    key={loc}
+                    style={[
+                      styles.drawerOption,
+                      {
+                        backgroundColor:
+                          loc === selectedDrawer ? 'black' : 'lightgrey',
+                      },
+                    ]}
+                    onPress={() => setSelectedDrawer(loc)}>
+                    <Text
+                      style={{
+                        color: loc === selectedDrawer ? 'white' : 'black',
+                      }}>
+                      {loc}
+                    </Text>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
           </View>
+          <View style={styles.configOptionContainer}>
+            <Text>Options</Text>
+            <View style={styles.optionsContainer}>
+              {Object.keys(selectedOptions).map(val => {
+                return (
+                  <TouchableOpacity
+                    style={styles.option}
+                    key={val}
+                    onPress={() =>
+                      setSelectedOptions({
+                        ...selectedOptions,
+                        [val]: !selectedOptions[val as OptionsT],
+                      })
+                    }>
+                    <RadioButton selected={selectedOptions[val as OptionsT]} />
+                    <View style={styles.optionTextContainer}>
+                      <Text
+                        style={{
+                          color: selectedOptions[val as OptionsT]
+                            ? 'black'
+                            : 'grey',
+                        }}>
+                        {val}
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+          </View>
+        </View>
+        {selectedOptions.enableNonSlideOpen ? (
           <TouchableOpacity
             style={[styles.button, {borderColor: isPeek ? 'green' : 'red'}]}
             onPress={() => setNonSlideOpen(!nonSlideOpen)}>
@@ -183,7 +233,9 @@ const App = () => {
               {isPeek ? 'Open' : 'Close'}
             </Text>
           </TouchableOpacity>
-        </View>
+        ) : (
+          <View style={[styles.button, {borderColor: 'rgba(0, 0, 0, 0)'}]} />
+        )}
         {displayDrawer(selectedDrawer)}
       </View>
     </SafeAreaView>
@@ -198,10 +250,20 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    // borderWidth: 1,
+    // borderColor: 'purple',
   },
   interactContainer: {
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  chooseDrawerContainer: {
+    // borderWidth: 1,
+    // borderColor: 'black',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 5,
   },
   drawerOptionsContainer: {
     marginVertical: 10,
@@ -212,6 +274,25 @@ const styles = StyleSheet.create({
     padding: 5,
     width: 60,
     alignItems: 'center',
+  },
+  configOptionContainer: {
+    // borderWidth: 1,
+    // borderColor: 'black',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 10,
+  },
+  optionsContainer: {
+    alignItems: 'flex-start',
+    marginVertical: 10,
+  },
+  option: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 5,
+  },
+  optionTextContainer: {
+    marginLeft: 5,
   },
   button: {
     borderWidth: 2,

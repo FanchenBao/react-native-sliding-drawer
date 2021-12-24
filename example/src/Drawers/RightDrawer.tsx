@@ -10,7 +10,7 @@
 
 import * as React from 'react';
 import {Text, View} from 'react-native';
-import {PeekableDrawer} from '../react-native-sliding-drawer';
+import {SlidingDrawer} from '../../react-native-sliding-drawer';
 import {styles} from './styles';
 
 type PropsT = {
@@ -21,58 +21,57 @@ type PropsT = {
     bottomBar: number;
   };
   isInitialPeek: boolean;
-  onDrawerOpen?: () => void;
-  onDrawerPeek?: () => void;
-  nonSlideOpen?: boolean;
+  onDrawerOpen: () => void;
+  onDrawerPeek: () => void;
+  nonSlideOpen: boolean;
+  nonSlideOpenEnabled: boolean;
 };
 
 /**
- * Example for a top drawer
+ * Example for a right drawer
  */
-export const TopDrawer: React.FC<PropsT> = props => {
-  const {screenDim, onDrawerOpen, onDrawerPeek, isInitialPeek, nonSlideOpen} =
-    props;
-  const peekSize = 80;
-  const openSize = 250;
+export const RightDrawer: React.FC<PropsT> = props => {
+  const {
+    screenDim,
+    onDrawerOpen,
+    onDrawerPeek,
+    isInitialPeek,
+    nonSlideOpen,
+    nonSlideOpenEnabled,
+  } = props;
+  const peekSize = 95;
+  const openSize = 200;
 
   return (
-    <PeekableDrawer
+    <SlidingDrawer
       screenDim={screenDim}
       peekSize={peekSize}
       openSize={openSize}
-      fixedLoc="top"
+      fixedLoc="right"
       expandable={true}
-      maxPct={0.4}
+      maxPct={0.6}
       onDrawerOpen={onDrawerOpen}
       onDrawerPeek={onDrawerPeek}
       isInitialPeek={isInitialPeek}
-      nonSlideOpenEnabled={true}
+      nonSlideOpenEnabled={nonSlideOpenEnabled}
       nonSlideOpen={nonSlideOpen}>
       <View
         style={[
           styles.drawerContainer,
-          {backgroundColor: 'rgba(0, 0, 255, 0.3)'},
+          {flexDirection: 'row', backgroundColor: 'rgba(0, 128, 0, 0.3)'},
         ]}>
-        <View
-          style={[
-            styles.openContainer,
-            {
-              flex: 1,
-              backgroundColor: 'rgba(0, 0, 255, 0.6)',
-              justifyContent: 'flex-end',
-            },
-          ]}>
-          <Text>Top Open Section</Text>
+        <View style={[styles.peekContainer, {width: peekSize}]}>
+          <Text>{'Right\nPeekable\nSection'}</Text>
         </View>
         <View style={styles.separator} />
         <View
           style={[
-            styles.peekContainer,
-            {height: peekSize, justifyContent: 'flex-end'},
+            styles.openContainer,
+            {flex: 1, backgroundColor: 'rgba(0, 128, 0, 0.6)'},
           ]}>
-          <Text>Top Peekable Section</Text>
+          <Text>{'Right\nOpen\nSection'}</Text>
         </View>
       </View>
-    </PeekableDrawer>
+    </SlidingDrawer>
   );
 };

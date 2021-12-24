@@ -47,7 +47,7 @@ type PropsT = {
   cause exactly, but it is most likely related to how Animate.View is
   implemented.
  */
-export const PeekableDrawer: React.FC<PropsT> = props => {
+export const SlidingDrawer: React.FC<PropsT> = props => {
   const {
     children,
     peekSize,
