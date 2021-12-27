@@ -12,12 +12,14 @@ import * as React from 'react';
 import {View, TouchableOpacity, Text, useWindowDimensions} from 'react-native';
 import {NonSlideOpenDrawers} from './src/NonSlideOpenDrawers/index';
 import {PeekableDrawer} from './src/PeekableDrawer';
+import {PeekableNonSlideOpenDrawers} from './src/PeekableNonSlideOpenDrawers';
 
 const App = () => {
   const {height} = useWindowDimensions();
   const demos = {
     Peekable: <PeekableDrawer />,
     NonSlideOpen: <NonSlideOpenDrawers />,
+    PeekableNonSlideOpen: <PeekableNonSlideOpenDrawers />,
   };
   const [selectedDemo, setSelectedDemo] =
     React.useState<keyof typeof demos>('Peekable');

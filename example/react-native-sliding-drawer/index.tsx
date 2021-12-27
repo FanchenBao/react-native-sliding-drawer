@@ -72,7 +72,7 @@ export const SlidingDrawer: React.FC<PropsT> = props => {
     useNativeDriver = false,
     elevation = 200, // A very big elevation, should guarantee the drawer is on top of everything else
     enableFadeBackground = false,
-    maxFadeBackgroundOpacity = 1.0,
+    maxFadeBackgroundOpacity = 0.5,
     onFadeBackgroundPress = () => {
       // Default no-op function
     },
