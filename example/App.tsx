@@ -13,6 +13,7 @@ import {View, TouchableOpacity, Text, useWindowDimensions} from 'react-native';
 import {NonSlideOpenDrawers} from './src/NonSlideOpenDrawers/index';
 import {PeekableDrawer} from './src/PeekableDrawer';
 import {PeekableNonSlideOpenDrawers} from './src/PeekableNonSlideOpenDrawers';
+import {FadeBgNonSlideOpenBgTappable} from './src/FadeBgNonSlideOpenBgTappable';
 
 const App = () => {
   const {height} = useWindowDimensions();
@@ -20,6 +21,7 @@ const App = () => {
     Peekable: <PeekableDrawer />,
     NonSlideOpen: <NonSlideOpenDrawers />,
     PeekableNonSlideOpen: <PeekableNonSlideOpenDrawers />,
+    FadeBgNonSlideOpenBgTappable: <FadeBgNonSlideOpenBgTappable />,
   };
   const [selectedDemo, setSelectedDemo] =
     React.useState<keyof typeof demos>('Peekable');
@@ -30,7 +32,7 @@ const App = () => {
         style={{
           position: 'absolute',
           alignSelf: 'center',
-          top: height / 4,
+          top: height / 5,
         }}>
         {Object.keys(demos).map(key => {
           const k = key as keyof typeof demos;
