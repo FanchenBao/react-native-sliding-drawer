@@ -24,7 +24,7 @@ import {styles} from './styles';
 
 export const NonSlideOpenDrawers = () => {
   const [initializing, setInitializing] = React.useState(true);
-  const [selectedDrawer, setSelectedDrawer] = React.useState('');
+  const [selectedDrawer, setSelectedDrawer] = React.useState('bottom');
 
   // Drawer-related
   const {height, width} = useWindowDimensions();

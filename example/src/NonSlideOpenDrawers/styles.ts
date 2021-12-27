@@ -13,6 +13,7 @@ import {StyleSheet} from 'react-native';
 export const styles = StyleSheet.create({
   backgroundStyle: {
     flex: 1,
+    backgroundColor: 'white',
   },
   content: {
     flex: 1,
@@ -25,6 +26,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 100,
   },
   chooseDrawerContainer: {
     // borderWidth: 1,

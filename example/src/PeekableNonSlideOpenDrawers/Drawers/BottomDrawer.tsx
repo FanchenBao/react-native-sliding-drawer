@@ -23,21 +23,14 @@ type PropsT = {
   onDrawerOpen: () => void;
   onDrawerPeek: () => void;
   nonSlideOpen: boolean;
-  nonSlideOpenEnabled: boolean;
 };
 
 /**
  * Example for a bottom drawer
  */
 export const BottomDrawer: React.FC<PropsT> = props => {
-  const {
-    screenDim,
-    onDrawerOpen,
-    onDrawerPeek,
-    isInitialPeek,
-    nonSlideOpen,
-    nonSlideOpenEnabled,
-  } = props;
+  const {screenDim, onDrawerOpen, onDrawerPeek, isInitialPeek, nonSlideOpen} =
+    props;
   const peekSize = 80;
   const openSize = 250;
 
@@ -51,7 +44,7 @@ export const BottomDrawer: React.FC<PropsT> = props => {
       onDrawerOpen={onDrawerOpen}
       onDrawerPeek={onDrawerPeek}
       isInitialPeek={isInitialPeek}
-      nonSlideOpenEnabled={nonSlideOpenEnabled}
+      enableNonSlideOpen={true}
       nonSlideOpen={nonSlideOpen}>
       <BottomDrawerContent peekSize={peekSize} />
     </SlidingDrawer>

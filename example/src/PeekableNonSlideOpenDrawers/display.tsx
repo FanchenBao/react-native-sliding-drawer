@@ -14,7 +14,7 @@ import {LeftDrawer} from './Drawers/LeftDrawer';
 import {RightDrawer} from './Drawers/RightDrawer';
 
 /**
- * A function to help display the nonSlideOpenDrawers
+ * A function to help display the peekable nonSlideOpenDrawers
  * @param drawer Name of drawer to be displayed.
  * @param screenDim Dimension of the screen.
  * @param nonSlideOpen Determines whether the drawer shall be at the open or
@@ -51,7 +51,6 @@ export const display = (
           onDrawerOpen={onDrawerOpen}
           onDrawerPeek={onDrawerPeek}
           nonSlideOpen={nonSlideOpen}
-          nonSlideOpenEnabled={true} // enable nonSlideOpen feature
         />
       );
     case 'bottom':
@@ -62,7 +61,6 @@ export const display = (
           onDrawerOpen={onDrawerOpen}
           onDrawerPeek={onDrawerPeek}
           nonSlideOpen={nonSlideOpen}
-          nonSlideOpenEnabled={true} // enable nonSlideOpen feature
         />
       );
     case 'left':
@@ -73,7 +71,6 @@ export const display = (
           onDrawerOpen={onDrawerOpen}
           onDrawerPeek={onDrawerPeek}
           nonSlideOpen={nonSlideOpen}
-          nonSlideOpenEnabled={true} // enable nonSlideOpen feature
         />
       );
     case 'right':
@@ -84,7 +81,6 @@ export const display = (
           onDrawerOpen={onDrawerOpen}
           onDrawerPeek={onDrawerPeek}
           nonSlideOpen={nonSlideOpen}
-          nonSlideOpenEnabled={true} // enable nonSlideOpen feature
         />
       );
     default:

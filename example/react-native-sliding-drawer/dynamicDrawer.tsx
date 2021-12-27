@@ -25,7 +25,7 @@ type PropsT = {
   fixedLoc: 'top' | 'bottom' | 'left' | 'right'; // Where the drawer is fixed at. Top drawer means sliding downwards, bottom upwards, left rightwards, right leftwards.
   sensitivity: number; // how much finger dragging (in pixels) shall trigger the drawer to change state.
   isInitialPeek: boolean; // a flag indicating whether the initial state of the drawer is Peek. Default to True.
-  nonSlideOpenEnabled: boolean; // a flag indicating whether a drawer can be opened without sliding.
+  enableNonSlideOpen: boolean; // a flag indicating whether a drawer can be opened without sliding.
   nonSlideOpen: boolean; // If true, open the drawer without sliding. Otherwise, peek the drawer without sliding.
   onDrawerOpen: () => void; // callback when the drawer is in open state.
   onDrawerPeek: () => void; // callback when the drawer is in peek state.
@@ -51,7 +51,7 @@ export const DynamicDrawer: React.FC<PropsT> = props => {
     maxPct,
     fixedLoc,
     sensitivity,
-    nonSlideOpenEnabled,
+    enableNonSlideOpen,
     nonSlideOpen,
     onDrawerOpen,
     onDrawerPeek,
@@ -253,7 +253,7 @@ export const DynamicDrawer: React.FC<PropsT> = props => {
 
   // Perform non-slide open or close of the drawer
   React.useEffect(() => {
-    if (nonSlideOpenEnabled) {
+    if (enableNonSlideOpen) {
       // @ts-ignore: _value is not exposed to typescript
       if (state._value === DrawerState.Peek && nonSlideOpen) {
         animate(DrawerState.Open);

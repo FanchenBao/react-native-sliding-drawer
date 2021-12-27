@@ -51,7 +51,6 @@ export const display = (
           onDrawerOpen={onDrawerOpen}
           onDrawerPeek={onDrawerPeek}
           nonSlideOpen={nonSlideOpen}
-          nonSlideOpenEnabled={true} // enable nonSlideOpen feature
         />
       );
     case 'bottom':
@@ -62,7 +61,6 @@ export const display = (
           onDrawerOpen={onDrawerOpen}
           onDrawerPeek={onDrawerPeek}
           nonSlideOpen={nonSlideOpen}
-          nonSlideOpenEnabled={true} // enable nonSlideOpen feature
         />
       );
     case 'left':
@@ -73,7 +71,6 @@ export const display = (
           onDrawerOpen={onDrawerOpen}
           onDrawerPeek={onDrawerPeek}
           nonSlideOpen={nonSlideOpen}
-          nonSlideOpenEnabled={true} // enable nonSlideOpen feature
         />
       );
     case 'right':
@@ -84,7 +81,6 @@ export const display = (
           onDrawerOpen={onDrawerOpen}
           onDrawerPeek={onDrawerPeek}
           nonSlideOpen={nonSlideOpen}
-          nonSlideOpenEnabled={true} // enable nonSlideOpen feature
         />
       );
     default:

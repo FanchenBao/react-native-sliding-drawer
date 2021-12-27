@@ -27,7 +27,7 @@ type PropsT = {
   sensitivity?: number; // how much finger dragging (in pixels) shall trigger the drawer to change state.
   expandable?: boolean; // whether the drawer is expandable. If set to false, the drawer cannot expand beyond the peek state
   isInitialPeek?: boolean; // a flag indicating whether the initial state of the drawer is Peek. Default to True.
-  nonSlideOpenEnabled?: boolean; // a flag indicating whether a drawer can be opened without sliding.
+  enableNonSlideOpen?: boolean; // a flag indicating whether a drawer can be opened without sliding.
   nonSlideOpen?: boolean; // If true, open the drawer without sliding. Otherwise, peek the drawer without sliding.
   onDrawerOpen?: () => void; // callback when the drawer is in open state. This callback CANNOT be state changes, because re-rendering when the drawer is not in the peek state would break its behavior.
   onDrawerPeek?: () => void; // callback when the drawer is in peek state. This callback CANNOT be state changes, because re-rendering when the drawer is not in the peek state would break its behavior.
@@ -60,7 +60,7 @@ export const SlidingDrawer: React.FC<PropsT> = props => {
     sensitivity = 10,
     expandable = false,
     isInitialPeek = true,
-    nonSlideOpenEnabled = false,
+    enableNonSlideOpen = false,
     nonSlideOpen = false,
     onDrawerOpen = () => {
       // Default no-op function
@@ -152,7 +152,7 @@ export const SlidingDrawer: React.FC<PropsT> = props => {
       fixedLoc={fixedLoc}
       sensitivity={sensitivity}
       isInitialPeek={isInitialPeek}
-      nonSlideOpenEnabled={nonSlideOpenEnabled}
+      enableNonSlideOpen={enableNonSlideOpen}
       nonSlideOpen={nonSlideOpen}
       onDrawerOpen={onDrawerOpen}
       onDrawerPeek={onDrawerPeek}

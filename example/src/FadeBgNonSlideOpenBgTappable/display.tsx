@@ -53,7 +53,6 @@ export const display = (
           onDrawerOpen={onDrawerOpen}
           onDrawerPeek={onDrawerPeek}
           nonSlideOpen={nonSlideOpen}
-          nonSlideOpenEnabled={true} // enable nonSlideOpen feature
           enableFadeBackground={enableFadeBackground}
           onFadeBackgroundPress={onFadeBackgroundPress}
         />
@@ -66,7 +65,6 @@ export const display = (
           onDrawerOpen={onDrawerOpen}
           onDrawerPeek={onDrawerPeek}
           nonSlideOpen={nonSlideOpen}
-          nonSlideOpenEnabled={true} // enable nonSlideOpen feature
           enableFadeBackground={enableFadeBackground}
           onFadeBackgroundPress={onFadeBackgroundPress}
         />
@@ -79,7 +77,6 @@ export const display = (
           onDrawerOpen={onDrawerOpen}
           onDrawerPeek={onDrawerPeek}
           nonSlideOpen={nonSlideOpen}
-          nonSlideOpenEnabled={true} // enable nonSlideOpen feature
           enableFadeBackground={enableFadeBackground}
           onFadeBackgroundPress={onFadeBackgroundPress}
         />
@@ -92,7 +89,6 @@ export const display = (
           onDrawerOpen={onDrawerOpen}
           onDrawerPeek={onDrawerPeek}
           nonSlideOpen={nonSlideOpen}
-          nonSlideOpenEnabled={true} // enable nonSlideOpen feature
           enableFadeBackground={enableFadeBackground}
           onFadeBackgroundPress={onFadeBackgroundPress}
         />
