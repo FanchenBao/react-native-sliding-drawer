@@ -9,10 +9,52 @@
  */
 
 import * as React from 'react';
+import {View, TouchableOpacity, Text, useWindowDimensions} from 'react-native';
 import {NonSlideOpenDrawers} from './src/NonSlideOpenDrawers/index';
+import {PeekableDrawer} from './src/PeekableDrawer';
 
 const App = () => {
-  return <NonSlideOpenDrawers />;
+  const {height} = useWindowDimensions();
+  const demos = {
+    Peekable: <PeekableDrawer />,
+    NonSlideOpen: <NonSlideOpenDrawers />,
+  };
+  const [selectedDemo, setSelectedDemo] =
+    React.useState<keyof typeof demos>('Peekable');
+  return (
+    <>
+      {demos[selectedDemo]}
+      <View
+        style={{
+          position: 'absolute',
+          alignSelf: 'center',
+          top: height / 4,
+        }}>
+        {Object.keys(demos).map(key => {
+          const k = key as keyof typeof demos;
+          return (
+            <TouchableOpacity
+              style={{
+                backgroundColor: selectedDemo === k ? 'blue' : 'lightgrey',
+                padding: 8,
+                borderRadius: 5,
+                alignItems: 'center',
+              }}
+              onPress={() => setSelectedDemo(k)}
+              key={k}>
+              <Text
+                style={{
+                  color: selectedDemo === k ? 'white' : 'grey',
+                  fontSize: 15,
+                }}>
+                {k}
+              </Text>
+            </TouchableOpacity>
+          );
+        })}
+      </View>
+    </>
+  );
 };
 
 export default App;

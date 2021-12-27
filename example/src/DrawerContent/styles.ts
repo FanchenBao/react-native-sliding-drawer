@@ -12,8 +12,8 @@ import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   separator: {
-    borderWidth: 2,
-    borderColor: 'grey',
+    borderWidth: 1,
+    borderColor: 'black',
   },
   drawerContainer: {
     flex: 1,

@@ -22,7 +22,7 @@ import {
 import {display} from './display';
 import {styles} from './styles';
 
-export const NonSlideOpenDrawers = () => {
+export const PeekableDrawer = () => {
   const [initializing, setInitializing] = React.useState(true);
   const [selectedDrawer, setSelectedDrawer] = React.useState('');
 
@@ -34,8 +34,6 @@ export const NonSlideOpenDrawers = () => {
     topBar: 0,
     bottomBar: 0,
   });
-  const [isInitialPeek, setIsInitialPeek] = React.useState(true);
-  const [nonSlideOpen, setNonSlideOpen] = React.useState(false);
 
   React.useEffect(() => {
     // A little delay when initializing the app to grab the screen dimension
@@ -109,30 +107,7 @@ export const NonSlideOpenDrawers = () => {
             </View>
           </View>
         </View>
-        <TouchableOpacity
-          style={[
-            styles.button,
-            {borderColor: isInitialPeek ? 'green' : 'red'},
-          ]}
-          onPress={() => setNonSlideOpen(!nonSlideOpen)}>
-          <Text style={{color: isInitialPeek ? 'green' : 'red'}}>
-            {isInitialPeek ? 'Open' : 'Close'}
-          </Text>
-        </TouchableOpacity>
-        {display(
-          selectedDrawer,
-          screenDim,
-          nonSlideOpen,
-          isInitialPeek,
-          () => {
-            setIsInitialPeek(false);
-            setNonSlideOpen(true);
-          },
-          () => {
-            setIsInitialPeek(true);
-            setNonSlideOpen(false);
-          },
-        )}
+        {display(selectedDrawer, screenDim)}
       </View>
     </SafeAreaView>
   );
