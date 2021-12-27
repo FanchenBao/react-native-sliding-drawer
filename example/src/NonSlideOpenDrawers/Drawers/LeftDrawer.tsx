@@ -9,9 +9,8 @@
  */
 
 import * as React from 'react';
-import {Text, View} from 'react-native';
-import {SlidingDrawer} from '../../react-native-sliding-drawer';
-import {styles} from './styles';
+import {SlidingDrawer} from '../../../react-native-sliding-drawer';
+import {LeftDrawerContent} from '../../DrawerContent/index';
 
 type PropsT = {
   screenDim: {
@@ -39,8 +38,8 @@ export const LeftDrawer: React.FC<PropsT> = props => {
     nonSlideOpen,
     nonSlideOpenEnabled,
   } = props;
-  const peekSize = 95;
-  const openSize = 200;
+  const peekSize = 0;
+  const openSize = 140;
 
   return (
     <SlidingDrawer
@@ -49,37 +48,12 @@ export const LeftDrawer: React.FC<PropsT> = props => {
       openSize={openSize}
       fixedLoc="left"
       expandable={true}
-      maxPct={0.6}
       onDrawerOpen={onDrawerOpen}
       onDrawerPeek={onDrawerPeek}
       isInitialPeek={isInitialPeek}
       nonSlideOpenEnabled={nonSlideOpenEnabled}
       nonSlideOpen={nonSlideOpen}>
-      <View
-        style={[
-          styles.drawerContainer,
-          {flexDirection: 'row', backgroundColor: 'rgba(165, 42, 42, 0.3)'},
-        ]}>
-        <View
-          style={[
-            styles.openContainer,
-            {
-              flex: 1,
-              alignItems: 'flex-end',
-              backgroundColor: 'rgba(165, 42, 42, 0.6)',
-            },
-          ]}>
-          <Text>{'Left\nOpen\nSection'}</Text>
-        </View>
-        <View style={styles.separator} />
-        <View
-          style={[
-            styles.peekContainer,
-            {width: peekSize, alignItems: 'flex-end'},
-          ]}>
-          <Text>{'Left\nPeekable\nSection'}</Text>
-        </View>
-      </View>
+      <LeftDrawerContent peekSize={peekSize} />
     </SlidingDrawer>
   );
 };

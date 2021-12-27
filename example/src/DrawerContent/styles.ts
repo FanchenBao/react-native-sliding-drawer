@@ -27,6 +27,7 @@ export const styles = StyleSheet.create({
     // borderColor: 'brown',
   },
   openContainer: {
+    flex: 1,
     padding: 18,
     // borderWidth: 2,
     // borderColor: 'green',

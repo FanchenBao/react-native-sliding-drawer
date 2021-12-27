@@ -9,9 +9,8 @@
  */
 
 import * as React from 'react';
-import {Text, View} from 'react-native';
-import {SlidingDrawer} from '../../react-native-sliding-drawer';
-import {styles} from './styles';
+import {SlidingDrawer} from '../../../react-native-sliding-drawer';
+import {TopDrawerContent} from '../../DrawerContent/index';
 
 type PropsT = {
   screenDim: {
@@ -28,9 +27,9 @@ type PropsT = {
 };
 
 /**
- * Example for a bottom drawer
+ * Example for a top drawer
  */
-export const BottomDrawer: React.FC<PropsT> = props => {
+export const TopDrawer: React.FC<PropsT> = props => {
   const {
     screenDim,
     onDrawerOpen,
@@ -39,7 +38,7 @@ export const BottomDrawer: React.FC<PropsT> = props => {
     nonSlideOpen,
     nonSlideOpenEnabled,
   } = props;
-  const peekSize = 80; // must add bottomBarHeight to equate the behavior in iOS and Android
+  const peekSize = 0;
   const openSize = 250;
 
   return (
@@ -47,31 +46,14 @@ export const BottomDrawer: React.FC<PropsT> = props => {
       screenDim={screenDim}
       peekSize={peekSize}
       openSize={openSize}
-      fixedLoc="bottom"
+      fixedLoc="top"
       expandable={true}
-      maxPct={0.4}
       onDrawerOpen={onDrawerOpen}
       onDrawerPeek={onDrawerPeek}
       isInitialPeek={isInitialPeek}
       nonSlideOpenEnabled={nonSlideOpenEnabled}
       nonSlideOpen={nonSlideOpen}>
-      <View
-        style={[
-          styles.drawerContainer,
-          {backgroundColor: 'rgba(255, 0, 0, 0.3)'},
-        ]}>
-        <View style={[styles.peekContainer, {height: peekSize}]}>
-          <Text>Bottom Peekable Section</Text>
-        </View>
-        <View style={styles.separator} />
-        <View
-          style={[
-            styles.openContainer,
-            {flex: 1, backgroundColor: 'rgba(255, 0, 0, 0.6)'},
-          ]}>
-          <Text>Bottom Open Section</Text>
-        </View>
-      </View>
+      <TopDrawerContent peekSize={peekSize} />
     </SlidingDrawer>
   );
 };
