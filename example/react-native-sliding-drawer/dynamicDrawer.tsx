@@ -340,7 +340,7 @@ export const DynamicDrawer: React.FC<PropsT> = props => {
                 : [0, maxFadeBackgroundOpacity],
             }),
             position: 'absolute',
-            height: 2 * screenDim.totalHeight,
+            height: screenDim.totalHeight,
             width: screenDim.width,
             elevation: elevation,
           }}>
