@@ -62,11 +62,6 @@ export const DynamicDrawer: React.FC<PropsT> = (props) => {
     isInitialPeek,
   } = props;
 
-  // If fade background is enabled, we disable dynamic setting of isInitialPeek
-  // because animation of fade requires that the initial state of the drawer
-  // be static.
-  // const isInitialPeek = enableFadeBackground ? true : props.isInitialPeek;
-
   // could be x or y direction displacement, depending on the value of fixedLoc
   const deltaXY = React.useRef(new Animated.Value(0)).current;
   const state = React.useRef<Animated.Value>(

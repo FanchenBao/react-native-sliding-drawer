@@ -9,7 +9,7 @@
  */
 
 import * as React from 'react';
-import {SlidingDrawer} from '../../../react-native-sliding-drawer';
+import {SlidingDrawer} from 'react-native-sliding-drawer';
 import {LeftDrawerContent} from '../../DrawerContent/index';
 
 type PropsT = {

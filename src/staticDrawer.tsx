@@ -8,8 +8,6 @@
 import * as React from 'react';
 import { View, ViewStyle } from 'react-native';
 
-// Import types
-
 type PropsT = {
   style: ViewStyle; // custom styles of the sliding window.
 };
