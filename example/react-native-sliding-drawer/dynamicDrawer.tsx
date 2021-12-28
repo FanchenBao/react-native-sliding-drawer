@@ -140,8 +140,11 @@ export const DynamicDrawer: React.FC<PropsT> = props => {
           onDrawerOpen();
           return;
         case DrawerState.Peek:
-          setFadeBackgroundOn(false);
+          // NOTE: the order is important. Must run setFadeBackgroundOn at the
+          // end to ensure that this is the last update to ensure that the
+          // fade background is gone after drawer is at peek state.
           onDrawerPeek();
+          setFadeBackgroundOn(false);
           return;
         default:
           return;
@@ -228,7 +231,7 @@ export const DynamicDrawer: React.FC<PropsT> = props => {
   ).current;
 
   /**
-  NOTE: 07-28-2021
+  NOTE: 2021-07-28
   This is VERY VERY VERY important. We want a feature such that when
   isInitialPeek changes, the behavior of the sliding drawer adapts accordingly.
   The adaptated behavior is coded in getNextDeltaXY, where we check the current
@@ -281,6 +284,12 @@ export const DynamicDrawer: React.FC<PropsT> = props => {
     state,
     enableFadeBackground,
     setFadeBackgroundOn,
+    // NOTE: although fadeBackgroundOn is not used in the effect, its inclusion
+    // is important! It forces additional run of this effect after
+    // fadeBackgroundOn is set to true such that animate() can be executed.
+    // Without including fadeBackgroundOn, animate() is never executed after
+    // setFadeBackgroundOn is run.
+    fadeBackgroundOn,
   ]);
 
   // Obtain the most important "transform" metric.

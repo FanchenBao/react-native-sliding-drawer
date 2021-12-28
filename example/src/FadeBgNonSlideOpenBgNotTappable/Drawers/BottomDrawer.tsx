@@ -34,7 +34,7 @@ export const BottomDrawer: React.FC<PropsT> = props => {
       onDrawerPeek={onDrawerPeek}
       enableNonSlideOpen={true}
       nonSlideOpen={nonSlideOpen}
-      enableFadeBackground={nonSlideOpen}>
+      enableFadeBackground={true}>
       <BottomDrawerContent peekSize={peekSize} />
     </SlidingDrawer>
   );
