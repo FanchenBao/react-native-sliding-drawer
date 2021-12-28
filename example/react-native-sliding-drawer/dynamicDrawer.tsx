@@ -77,6 +77,7 @@ export const DynamicDrawer: React.FC<PropsT> = props => {
     new Animated.Value(isInitialPeek ? DrawerState.Peek : DrawerState.Open),
   ).current;
   const isInitialPeekRef = React.useRef(isInitialPeek);
+  const [fadeBackgroundOn, setFadeBackgroundOn] = React.useState(false);
 
   // Compute the next state based on the current state and the displacement.
   // Note that dxy represents a displacement either vertically or horizontally,
@@ -139,6 +140,7 @@ export const DynamicDrawer: React.FC<PropsT> = props => {
           onDrawerOpen();
           return;
         case DrawerState.Peek:
+          setFadeBackgroundOn(false);
           onDrawerPeek();
           return;
         default:
@@ -183,6 +185,9 @@ export const DynamicDrawer: React.FC<PropsT> = props => {
         // of deltaXY. What we want is to move everything from value to offset
         // while not changing the overall output.
         deltaXY.extractOffset();
+        if (enableFadeBackground) {
+          setFadeBackgroundOn(true);
+        }
       },
       onPanResponderMove: (_, {dx, dy}) => {
         // prevent user from moving the drawer too much
@@ -256,13 +261,27 @@ export const DynamicDrawer: React.FC<PropsT> = props => {
     if (enableNonSlideOpen) {
       // @ts-ignore: _value is not exposed to typescript
       if (state._value === DrawerState.Peek && nonSlideOpen) {
+        if (enableFadeBackground) {
+          setFadeBackgroundOn(true);
+        }
         animate(DrawerState.Open);
         // @ts-ignore: _value is not exposed to typescript
       } else if (state._value === DrawerState.Open && !nonSlideOpen) {
+        if (enableFadeBackground) {
+          setFadeBackgroundOn(true);
+        }
         animate(DrawerState.Peek);
       }
     }
-  });
+  }, [
+    enableNonSlideOpen,
+    DrawerState,
+    animate,
+    nonSlideOpen,
+    state,
+    enableFadeBackground,
+    setFadeBackgroundOn,
+  ]);
 
   // Obtain the most important "transform" metric.
   const getTransform = () => {
@@ -290,7 +309,7 @@ export const DynamicDrawer: React.FC<PropsT> = props => {
 
   return (
     <>
-      {enableFadeBackground && (
+      {fadeBackgroundOn && (
         <Animated.View
           style={{
             backgroundColor: 'black',

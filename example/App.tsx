@@ -15,6 +15,7 @@ import {PeekableDrawer} from './src/PeekableDrawer';
 import {PeekableNonSlideOpenDrawers} from './src/PeekableNonSlideOpenDrawers';
 import {FadeBgNonSlideOpenBgNotTappable} from './src/FadeBgNonSlideOpenBgNotTappable';
 import {FadeBgNonSlideOpenBgTappable} from './src/FadeBgNonSlideOpenBgTappable';
+import {FadeBgPeekableBgNotTappable} from './src/FadeBgPeekableBgNotTappable';
 
 const App = () => {
   const {height} = useWindowDimensions();
@@ -22,6 +23,7 @@ const App = () => {
     Peekable: <PeekableDrawer />,
     NonSlideOpen: <NonSlideOpenDrawers />,
     PeekableNonSlideOpen: <PeekableNonSlideOpenDrawers />,
+    FadeBgPeekableBgNotTappable: <FadeBgPeekableBgNotTappable />,
     FadeBgNonSlideOpenBgNotTappable: <FadeBgNonSlideOpenBgNotTappable />,
     FadeBgNonSlideOpenBgTappable: <FadeBgNonSlideOpenBgTappable />,
   };
