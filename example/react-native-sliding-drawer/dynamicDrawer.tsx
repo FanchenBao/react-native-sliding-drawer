@@ -11,13 +11,10 @@ import {
   PanResponder,
   TouchableOpacity,
   ViewStyle,
+  useWindowDimensions,
 } from 'react-native';
 
 type PropsT = {
-  screenDim: {
-    width: number;
-    totalHeight: number;
-  };
   isVertical: boolean; // whether the drawer opens in the vertical direction
   size: number; // size of the screen in the same direction as how the drawer opens.
   DrawerState: {Open: number; Peek: number};
@@ -57,7 +54,6 @@ export const DynamicDrawer: React.FC<PropsT> = props => {
     onDrawerPeek,
     speed,
     useNativeDriver,
-    screenDim,
     elevation,
     enableFadeBackground,
     maxFadeBackgroundOpacity,
@@ -78,6 +74,7 @@ export const DynamicDrawer: React.FC<PropsT> = props => {
   ).current;
   const isInitialPeekRef = React.useRef(isInitialPeek);
   const [fadeBackgroundOn, setFadeBackgroundOn] = React.useState(false);
+  const {height, width} = useWindowDimensions();
 
   // Compute the next state based on the current state and the displacement.
   // Note that dxy represents a displacement either vertically or horizontally,
@@ -340,8 +337,8 @@ export const DynamicDrawer: React.FC<PropsT> = props => {
                 : [0, maxFadeBackgroundOpacity],
             }),
             position: 'absolute',
-            height: screenDim.totalHeight,
-            width: screenDim.width,
+            height: height,
+            width: width,
             elevation: elevation,
           }}>
           <TouchableOpacity

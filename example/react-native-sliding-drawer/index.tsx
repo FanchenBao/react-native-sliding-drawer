@@ -6,12 +6,7 @@
  */
 
 import * as React from 'react';
-import {
-  Platform,
-  NativeModules,
-  StatusBar,
-  useWindowDimensions,
-} from 'react-native';
+import {useWindowDimensions} from 'react-native';
 import {DynamicDrawer} from './dynamicDrawer';
 import {StaticDrawer} from './staticDrawer';
 
@@ -85,61 +80,9 @@ export const SlidingDrawer: React.FC<PropsT> = props => {
     [openSize, peekSize],
   );
 
-  const [initializing, setInitializing] = React.useState(true);
   const {height, width} = useWindowDimensions();
-  const [screenDim, setScreenDim] = React.useState({
-    width: -1,
-    totalHeight: -1,
-    topBar: -1,
-  });
-
-  React.useEffect(() => {
-    if (initializing) {
-      if (
-        Object.keys(screenDim).every(
-          k => screenDim[k as keyof typeof screenDim] >= 0,
-        )
-      ) {
-        setInitializing(false);
-      } else {
-        /**
-         * NOTE: Obtain Screen Dimension
-         *
-         * The screen width and total height can be obtained from useWindowDimensions
-         * While width is the entire width of a device for both Android and iOS,
-         * height is interpreted differently. In iOS, height from useWindowDimensions
-         * is the total height of the device, including the top bar (status bar),
-         * screen height, and bottom bar. In Android, height is just the screen,
-         * not counting the top bar (there is no bottom bar in Android). Thus, to
-         * compute the total screen height of Android, we use
-         * useWindowDimensions().height + top bar height.
-         */
-        if (Platform.OS === 'ios') {
-          NativeModules.StatusBarManager.getHeight((h: {height: number}) => {
-            setScreenDim({
-              topBar: h.height,
-              totalHeight: height,
-              width: width,
-            });
-          });
-        } else {
-          setScreenDim({
-            topBar: StatusBar.currentHeight ? StatusBar.currentHeight : 0,
-            totalHeight:
-              height + (StatusBar.currentHeight ? StatusBar.currentHeight : 0),
-            width: width,
-          });
-        }
-      }
-    }
-  }, [initializing, setInitializing, screenDim, height, width]);
-
-  if (initializing) {
-    return null;
-  }
-
   const isVertical = ['top', 'bottom'].includes(fixedLoc);
-  const size = isVertical ? screenDim.totalHeight : screenDim.width;
+  const size = isVertical ? height : width;
 
   if (maxPct * size < openSize || openSize < peekSize) {
     throw new Error(
@@ -152,34 +95,29 @@ export const SlidingDrawer: React.FC<PropsT> = props => {
       case 'top':
         return {
           height: size,
-          width: drawerWidth < 0 ? screenDim.width : drawerWidth,
+          width: drawerWidth < 0 ? width : drawerWidth,
           bottom:
-            size -
-            (isInitialPeek ? DrawerState.Peek : DrawerState.Open) -
-            (Platform.OS === 'android' ? screenDim.topBar : 0),
+            height - (isInitialPeek ? DrawerState.Peek : DrawerState.Open),
           elevation: elevation,
         };
       case 'bottom':
         return {
           height: size,
-          width: drawerWidth < 0 ? screenDim.width : drawerWidth,
-          top:
-            size -
-            (isInitialPeek ? DrawerState.Peek : DrawerState.Open) -
-            (Platform.OS === 'android' ? screenDim.topBar : 0),
+          width: drawerWidth < 0 ? width : drawerWidth,
+          top: height - (isInitialPeek ? DrawerState.Peek : DrawerState.Open),
           elevation: elevation,
         };
       case 'left':
         return {
           width: size,
-          height: drawerHeight < 0 ? screenDim.totalHeight : drawerHeight,
+          height: drawerHeight < 0 ? height : drawerHeight,
           right: size - (isInitialPeek ? DrawerState.Peek : DrawerState.Open),
           elevation: elevation,
         };
       case 'right':
         return {
           width: size,
-          height: drawerHeight < 0 ? screenDim.totalHeight : drawerHeight,
+          height: drawerHeight < 0 ? height : drawerHeight,
           left: size - (isInitialPeek ? DrawerState.Peek : DrawerState.Open),
           elevation: elevation,
         };
@@ -191,7 +129,6 @@ export const SlidingDrawer: React.FC<PropsT> = props => {
   return expandable ? (
     <DynamicDrawer
       isVertical={isVertical}
-      screenDim={screenDim}
       size={size}
       DrawerState={DrawerState}
       maxPct={maxPct}
