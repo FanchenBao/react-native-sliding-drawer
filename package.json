@@ -130,7 +130,8 @@
     "singleQuote": true,
     "tabWidth": 2,
     "trailingComma": "es5",
-    "useTabs": false
+    "useTabs": false,
+    "bracketSpacing": false
   },
   "react-native-builder-bob": {
     "source": "src",

@@ -39,7 +39,7 @@ type PropsT = {
 	Function component of a dynamic sliding drawer
 	Inspired by: https://dev.to/johannawad/creating-a-swipe-up-bottom-drawer-in-react-native-no-external-libraries-3ng1
  */
-export const DynamicDrawer: React.FC<PropsT> = (props) => {
+export const DynamicDrawer: React.FC<PropsT> = props => {
   const {
     children,
     isVertical,
@@ -65,7 +65,7 @@ export const DynamicDrawer: React.FC<PropsT> = (props) => {
   // could be x or y direction displacement, depending on the value of fixedLoc
   const deltaXY = React.useRef(new Animated.Value(0)).current;
   const state = React.useRef<Animated.Value>(
-    new Animated.Value(isInitialPeek ? DrawerState.Peek : DrawerState.Open)
+    new Animated.Value(isInitialPeek ? DrawerState.Peek : DrawerState.Open),
   ).current;
   const isInitialPeekRef = React.useRef(isInitialPeek);
   const [fadeBackgroundOn, setFadeBackgroundOn] = React.useState(false);
@@ -121,7 +121,7 @@ export const DynamicDrawer: React.FC<PropsT> = (props) => {
           return 0;
       }
     },
-    [DrawerState, fixedLoc]
+    [DrawerState, fixedLoc],
   );
 
   // Callbacks upon Open or Peek drawer state is reached.
@@ -142,7 +142,7 @@ export const DynamicDrawer: React.FC<PropsT> = (props) => {
           return;
       }
     },
-    [DrawerState, onDrawerPeek, onDrawerOpen]
+    [DrawerState, onDrawerPeek, onDrawerOpen],
   );
 
   // Animate the movement of the drawer. Note that since the animation always
@@ -166,7 +166,7 @@ export const DynamicDrawer: React.FC<PropsT> = (props) => {
         }
       });
     },
-    [state, deltaXY, getNextDeltaXY, speed, useNativeDriver, onReachNextState]
+    [state, deltaXY, getNextDeltaXY, speed, useNativeDriver, onReachNextState],
   );
 
   const panResponder = React.useRef(
@@ -195,8 +195,8 @@ export const DynamicDrawer: React.FC<PropsT> = (props) => {
                 fixedLoc === 'top' ? dy : dx,
                 // @ts-ignore: _value is not exposed to typescript, but there
                 // is no other way to obtain the current state's animated value
-                size * maxPct - state._value
-              )
+                size * maxPct - state._value,
+              ),
             );
             break;
           case 'bottom':
@@ -206,8 +206,8 @@ export const DynamicDrawer: React.FC<PropsT> = (props) => {
               Math.max(
                 fixedLoc === 'bottom' ? dy : dx,
                 // @ts-ignore: _value is not exposed to typescript
-                state._value - size * maxPct
-              )
+                state._value - size * maxPct,
+              ),
             );
             break;
           default:
@@ -219,7 +219,7 @@ export const DynamicDrawer: React.FC<PropsT> = (props) => {
         const nextState = getNextState(state._value, isVertical ? dy : dx);
         animate(nextState);
       },
-    })
+    }),
   ).current;
 
   /**
@@ -319,12 +319,12 @@ export const DynamicDrawer: React.FC<PropsT> = (props) => {
                 Math.min(
                   0,
                   getNextDeltaXY(DrawerState.Open),
-                  getNextDeltaXY(DrawerState.Peek)
+                  getNextDeltaXY(DrawerState.Peek),
                 ),
                 Math.max(
                   0,
                   getNextDeltaXY(DrawerState.Open),
-                  getNextDeltaXY(DrawerState.Peek)
+                  getNextDeltaXY(DrawerState.Peek),
                 ),
               ],
               outputRange: ['right', 'bottom'].includes(fixedLoc)
@@ -335,8 +335,7 @@ export const DynamicDrawer: React.FC<PropsT> = (props) => {
             height: height,
             width: width,
             elevation: elevation,
-          }}
-        >
+          }}>
           <TouchableOpacity
             onPress={() => onFadeBackgroundPress()}
             style={{flex: 1}}
@@ -346,8 +345,7 @@ export const DynamicDrawer: React.FC<PropsT> = (props) => {
       <Animated.View
         style={[{position: 'absolute'}, style, getTransform()]}
         /* Refers to the PanResponder created above */
-        {...panResponder.panHandlers}
-      >
+        {...panResponder.panHandlers}>
         {children}
       </Animated.View>
     </>

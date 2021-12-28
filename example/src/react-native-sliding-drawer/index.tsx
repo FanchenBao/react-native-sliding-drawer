@@ -36,7 +36,7 @@ type PropsT = {
 /**
 	Function component of a sliding drawer
  */
-export const SlidingDrawer: React.FC<PropsT> = (props) => {
+export const SlidingDrawer: React.FC<PropsT> = props => {
   const {
     children,
     peekSize,
@@ -72,7 +72,7 @@ export const SlidingDrawer: React.FC<PropsT> = (props) => {
       Open: openSize,
       Peek: peekSize,
     }),
-    [openSize, peekSize]
+    [openSize, peekSize],
   );
 
   const {height, width} = useWindowDimensions();
@@ -81,7 +81,7 @@ export const SlidingDrawer: React.FC<PropsT> = (props) => {
 
   if (maxPct * size < openSize || openSize < peekSize) {
     throw new Error(
-      'Wrong Peekable Drawer set up. openSize must not be smaller than peekSize; maxPct times size must not be smaller than openSize'
+      'Wrong Peekable Drawer set up. openSize must not be smaller than peekSize; maxPct times size must not be smaller than openSize',
     );
   }
 
@@ -140,8 +140,7 @@ export const SlidingDrawer: React.FC<PropsT> = (props) => {
       enableFadeBackground={enableFadeBackground}
       maxFadeBackgroundOpacity={maxFadeBackgroundOpacity}
       onFadeBackgroundPress={onFadeBackgroundPress}
-      style={getStyles()}
-    >
+      style={getStyles()}>
       {children}
     </DynamicDrawer>
   ) : (
