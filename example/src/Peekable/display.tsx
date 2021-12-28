@@ -14,7 +14,7 @@ import {LeftDrawer} from './Drawers/LeftDrawer';
 import {RightDrawer} from './Drawers/RightDrawer';
 
 /**
- * A function to help display the peekableDrawer
+ * A function to help display the peekable Drawer
  * @param drawer Name of drawer to be displayed.
  * @returns A sliding drawer component
  */

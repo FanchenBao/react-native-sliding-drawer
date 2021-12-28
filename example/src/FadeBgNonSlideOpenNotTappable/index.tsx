@@ -12,9 +12,8 @@ import * as React from 'react';
 import {display} from './display';
 import {DrawerChoices} from '../DrawerChoices';
 
-export const NonSlideOpenDrawers = () => {
+export const FadeBgNonSlideOpenNotTappable = () => {
   const [selectedDrawer, setSelectedDrawer] = React.useState('bottom');
-  const [isInitialPeek, setIsInitialPeek] = React.useState(true);
   const [nonSlideOpen, setNonSlideOpen] = React.useState(false);
 
   return (
@@ -23,22 +22,9 @@ export const NonSlideOpenDrawers = () => {
         selectedDrawer={selectedDrawer}
         onChoicePress={setSelectedDrawer}
         enableNonSlideOpen={true}
-        isInitialPeek={isInitialPeek}
         onNonSlideOpenButtonPress={() => setNonSlideOpen(!nonSlideOpen)}
       />
-      {display(
-        selectedDrawer,
-        nonSlideOpen,
-        isInitialPeek,
-        () => {
-          setIsInitialPeek(false);
-          setNonSlideOpen(true);
-        },
-        () => {
-          setIsInitialPeek(true);
-          setNonSlideOpen(false);
-        },
-      )}
+      {display(selectedDrawer, nonSlideOpen, () => setNonSlideOpen(false))}
     </>
   );
 };

@@ -10,20 +10,20 @@
 
 import * as React from 'react';
 import {View, TouchableOpacity, Text} from 'react-native';
-import {NonSlideOpenDrawers} from './src/NonSlideOpenDrawers/index';
-import {PeekableDrawer} from './src/PeekableDrawer';
-import {PeekableNonSlideOpenDrawers} from './src/PeekableNonSlideOpenDrawers';
-import {FadeBgNonSlideOpenBgNotTappable} from './src/FadeBgNonSlideOpenBgNotTappable';
+import {NonSlideOpen} from './src/NonSlideOpen/index';
+import {Peekable} from './src/Peekable';
+import {PeekableNonSlideOpen} from './src/PeekableNonSlideOpen';
+import {FadeBgNonSlideOpenNotTappable} from './src/FadeBgNonSlideOpenNotTappable';
 import {FadeBgTappable} from './src/FadeBgTappable';
-import {FadeBgPeekableBgNotTappable} from './src/FadeBgPeekableBgNotTappable';
+import {FadeBgPeekableNotTappable} from './src/FadeBgPeekableNotTappable';
 
 const App = () => {
   const demos = {
-    Peekable: <PeekableDrawer />,
-    NonSlideOpen: <NonSlideOpenDrawers />,
-    PeekableNonSlideOpen: <PeekableNonSlideOpenDrawers />,
-    FadeBgPeekableBgNotTappable: <FadeBgPeekableBgNotTappable />,
-    FadeBgNonSlideOpenBgNotTappable: <FadeBgNonSlideOpenBgNotTappable />,
+    Peekable: <Peekable />,
+    NonSlideOpen: <NonSlideOpen />,
+    PeekableNonSlideOpen: <PeekableNonSlideOpen />,
+    FadeBgPeekableNotTappable: <FadeBgPeekableNotTappable />,
+    FadeBgNonSlideOpenNotTappable: <FadeBgNonSlideOpenNotTappable />,
     FadeBgTappable: <FadeBgTappable />,
   };
   const [selectedDemo, setSelectedDemo] =

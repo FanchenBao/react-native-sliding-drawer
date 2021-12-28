@@ -12,7 +12,7 @@ import * as React from 'react';
 import {display} from './display';
 import {DrawerChoices} from '../DrawerChoices';
 
-export const PeekableNonSlideOpenDrawers = () => {
+export const PeekableNonSlideOpen = () => {
   const [selectedDrawer, setSelectedDrawer] = React.useState('bottom');
   const [isInitialPeek, setIsInitialPeek] = React.useState(true);
   const [nonSlideOpen, setNonSlideOpen] = React.useState(false);

@@ -14,7 +14,7 @@ import {LeftDrawer} from './Drawers/LeftDrawer';
 import {RightDrawer} from './Drawers/RightDrawer';
 
 /**
- * A function to help display the peekable nonSlideOpenDrawers
+ * A function to help display the nonSlideOpen Drawers
  * @param drawer Name of drawer to be displayed.
  * @param nonSlideOpen Determines whether the drawer shall be at the open or
  * peek state. true = slide at open state, false = slide at peek state

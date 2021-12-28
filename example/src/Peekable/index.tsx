@@ -12,7 +12,7 @@ import * as React from 'react';
 import {display} from './display';
 import {DrawerChoices} from '../DrawerChoices';
 
-export const FadeBgPeekableBgNotTappable = () => {
+export const Peekable = () => {
   const [selectedDrawer, setSelectedDrawer] = React.useState('bottom');
 
   return (
