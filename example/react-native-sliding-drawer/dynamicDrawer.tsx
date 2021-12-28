@@ -78,9 +78,6 @@ export const DynamicDrawer: React.FC<PropsT> = props => {
   ).current;
   const isInitialPeekRef = React.useRef(isInitialPeek);
   const [fadeBackgroundOn, setFadeBackgroundOn] = React.useState(false);
-  // dummy is used for additional re-rendering when nececessary. This is
-  // typically used when fade background is involved.
-  const [dummy, setDummy] = React.useState(true);
 
   // Compute the next state based on the current state and the displacement.
   // Note that dxy represents a displacement either vertically or horizontally,
@@ -294,30 +291,6 @@ export const DynamicDrawer: React.FC<PropsT> = props => {
     // setFadeBackgroundOn is run.
     fadeBackgroundOn,
   ]);
-
-  /**
-   * NOTE: 2021-12-28
-   *
-   * This effect causes an additional re-render under very specific condition:
-   * 1. fade background is enabled
-   * 2. fade background is involved with change in isInitialPeek, which means
-   * a tap/press is needed to bring the drawer from open to peek (if no state
-   * change is needed to close the drawer, we don't have to modify
-   * isInitialPeek).
-   *
-   * In such situation, we must perform an extra re-render to set the fade
-   * background in the correct state. Unfortunately, I do not know the detailed
-   * mechanism, but it seems that Animated View is lazily evaluated. Thus any
-   * change in state value requires an extra re-render to take effect. This is
-   * just my guess.
-   */
-  React.useEffect(() => {
-    if (enableFadeBackground) {
-      if ((!isInitialPeek && dummy) || (isInitialPeek && !dummy)) {
-        setDummy(!dummy);
-      }
-    }
-  }, [enableFadeBackground, isInitialPeek, dummy]);
 
   // Obtain the most important "transform" metric.
   const getTransform = () => {
