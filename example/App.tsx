@@ -17,8 +17,6 @@ import {FadeBgNonSlideOpenBgNotTappable} from './src/FadeBgNonSlideOpenBgNotTapp
 import {FadeBgTappable} from './src/FadeBgTappable';
 import {FadeBgPeekableBgNotTappable} from './src/FadeBgPeekableBgNotTappable';
 
-// TODO: FadeBgPeekableBgTappable
-
 const App = () => {
   const {height} = useWindowDimensions();
   const demos = {

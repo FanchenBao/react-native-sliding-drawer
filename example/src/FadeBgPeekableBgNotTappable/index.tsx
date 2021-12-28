@@ -9,43 +9,21 @@
  */
 
 import * as React from 'react';
-import {Text, View, SafeAreaView, TouchableOpacity} from 'react-native';
+import {View, SafeAreaView} from 'react-native';
 import {display} from './display';
 import {styles} from './styles';
+import {DrawerChoices} from '../DrawerChoices';
 
 export const FadeBgPeekableBgNotTappable = () => {
   const [selectedDrawer, setSelectedDrawer] = React.useState('bottom');
 
   return (
     <SafeAreaView style={styles.backgroundStyle}>
-      <View style={[styles.content]}>
-        <View style={styles.interactContainer}>
-          <View style={styles.chooseDrawerContainer}>
-            <View style={styles.drawerOptionsContainer}>
-              {['bottom', 'top', 'left', 'right'].map(loc => {
-                return (
-                  <TouchableOpacity
-                    key={loc}
-                    style={[
-                      styles.drawerOption,
-                      {
-                        backgroundColor:
-                          loc === selectedDrawer ? 'black' : 'lightgrey',
-                      },
-                    ]}
-                    onPress={() => setSelectedDrawer(loc)}>
-                    <Text
-                      style={{
-                        color: loc === selectedDrawer ? 'white' : 'black',
-                      }}>
-                      {loc}
-                    </Text>
-                  </TouchableOpacity>
-                );
-              })}
-            </View>
-          </View>
-        </View>
+      <View style={styles.content}>
+        <DrawerChoices
+          selectedDrawer={selectedDrawer}
+          onChoicePress={setSelectedDrawer}
+        />
         {display(selectedDrawer)}
       </View>
     </SafeAreaView>
