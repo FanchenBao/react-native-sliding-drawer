@@ -10,7 +10,7 @@
 
 import * as React from 'react';
 import {SlidingDrawer} from '../../../react-native-sliding-drawer';
-import {RightDrawerContent} from '../../DrawerContent/index';
+import {TopDrawerContent} from '../../DrawerContent/index';
 
 type PropsT = {
   isInitialPeek: boolean;
@@ -21,9 +21,9 @@ type PropsT = {
 };
 
 /**
- * Example for a right drawer
+ * Example for a top drawer
  */
-export const RightDrawer: React.FC<PropsT> = props => {
+export const TopDrawer: React.FC<PropsT> = props => {
   const {
     onDrawerOpen,
     onDrawerPeek,
@@ -31,24 +31,23 @@ export const RightDrawer: React.FC<PropsT> = props => {
     nonSlideOpen,
     onFadeBackgroundPress,
   } = props;
-  const peekSize = 0;
-  const openSize = 200;
+  const peekSize = 80;
+  const openSize = 250;
 
   return (
     <SlidingDrawer
       peekSize={peekSize}
       openSize={openSize}
-      fixedLoc="right"
+      fixedLoc="top"
       expandable={true}
       onDrawerOpen={onDrawerOpen}
       onDrawerPeek={onDrawerPeek}
       isInitialPeek={isInitialPeek}
       enableNonSlideOpen={true}
       nonSlideOpen={nonSlideOpen}
-      maxPct={0.7}
       enableFadeBackground={true}
       onFadeBackgroundPress={onFadeBackgroundPress}>
-      <RightDrawerContent peekSize={peekSize} />
+      <TopDrawerContent peekSize={peekSize} />
     </SlidingDrawer>
   );
 };

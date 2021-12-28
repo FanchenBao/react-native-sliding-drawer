@@ -13,7 +13,7 @@ import {Text, View, SafeAreaView, TouchableOpacity} from 'react-native';
 import {display} from './display';
 import {styles} from './styles';
 
-export const FadeBgNonSlideOpenBgTappable = () => {
+export const FadeBgTappable = () => {
   const [selectedDrawer, setSelectedDrawer] = React.useState('bottom');
   const [isInitialPeek, setIsInitialPeek] = React.useState(true);
   const [nonSlideOpen, setNonSlideOpen] = React.useState(false);
@@ -77,6 +77,7 @@ export const FadeBgNonSlideOpenBgTappable = () => {
           isInitialPeek,
           () => {
             setIsInitialPeek(false);
+            setNonSlideOpen(true);
             setDummy(!dummy);
           },
           () => {

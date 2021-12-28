@@ -31,7 +31,7 @@ export const LeftDrawer: React.FC<PropsT> = props => {
     nonSlideOpen,
     onFadeBackgroundPress,
   } = props;
-  const peekSize = 0;
+  const peekSize = 95;
   const openSize = 200;
 
   return (

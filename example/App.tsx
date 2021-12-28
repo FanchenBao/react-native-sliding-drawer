@@ -14,8 +14,10 @@ import {NonSlideOpenDrawers} from './src/NonSlideOpenDrawers/index';
 import {PeekableDrawer} from './src/PeekableDrawer';
 import {PeekableNonSlideOpenDrawers} from './src/PeekableNonSlideOpenDrawers';
 import {FadeBgNonSlideOpenBgNotTappable} from './src/FadeBgNonSlideOpenBgNotTappable';
-import {FadeBgNonSlideOpenBgTappable} from './src/FadeBgNonSlideOpenBgTappable';
+import {FadeBgTappable} from './src/FadeBgTappable';
 import {FadeBgPeekableBgNotTappable} from './src/FadeBgPeekableBgNotTappable';
+
+// TODO: FadeBgPeekableBgTappable
 
 const App = () => {
   const {height} = useWindowDimensions();
@@ -25,7 +27,7 @@ const App = () => {
     PeekableNonSlideOpen: <PeekableNonSlideOpenDrawers />,
     FadeBgPeekableBgNotTappable: <FadeBgPeekableBgNotTappable />,
     FadeBgNonSlideOpenBgNotTappable: <FadeBgNonSlideOpenBgNotTappable />,
-    FadeBgNonSlideOpenBgTappable: <FadeBgNonSlideOpenBgTappable />,
+    FadeBgTappable: <FadeBgTappable />,
   };
   const [selectedDemo, setSelectedDemo] =
     React.useState<keyof typeof demos>('Peekable');

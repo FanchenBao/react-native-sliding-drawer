@@ -14,7 +14,7 @@ import {LeftDrawer} from './Drawers/LeftDrawer';
 import {RightDrawer} from './Drawers/RightDrawer';
 
 /**
- * A function to help display the FadeBgNonSlideOpenBgTappable drawers
+ * A function to help display the FadeBgTappable drawers
  * @param drawer Name of drawer to be displayed.
  * @param nonSlideOpen Determines whether the drawer shall be at the open or
  * peek state. true = slide at open state, false = slide at peek state
