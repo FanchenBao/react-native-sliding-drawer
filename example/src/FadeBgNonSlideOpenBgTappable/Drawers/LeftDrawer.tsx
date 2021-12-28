@@ -17,7 +17,6 @@ type PropsT = {
   onDrawerOpen: () => void;
   onDrawerPeek: () => void;
   nonSlideOpen: boolean;
-  enableFadeBackground: boolean;
   onFadeBackgroundPress: () => void;
 };
 
@@ -30,7 +29,6 @@ export const LeftDrawer: React.FC<PropsT> = props => {
     onDrawerPeek,
     isInitialPeek,
     nonSlideOpen,
-    enableFadeBackground,
     onFadeBackgroundPress,
   } = props;
   const peekSize = 0;
@@ -48,7 +46,7 @@ export const LeftDrawer: React.FC<PropsT> = props => {
       enableNonSlideOpen={true}
       nonSlideOpen={nonSlideOpen}
       maxPct={0.7}
-      enableFadeBackground={enableFadeBackground}
+      enableFadeBackground={true}
       onFadeBackgroundPress={onFadeBackgroundPress}>
       <LeftDrawerContent peekSize={peekSize} />
     </SlidingDrawer>

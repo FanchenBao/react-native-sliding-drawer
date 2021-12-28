@@ -17,7 +17,6 @@ type PropsT = {
   onDrawerOpen: () => void;
   onDrawerPeek: () => void;
   nonSlideOpen: boolean;
-  enableFadeBackground: boolean;
   onFadeBackgroundPress: () => void;
 };
 
@@ -30,7 +29,6 @@ export const TopDrawer: React.FC<PropsT> = props => {
     onDrawerPeek,
     isInitialPeek,
     nonSlideOpen,
-    enableFadeBackground,
     onFadeBackgroundPress,
   } = props;
   const peekSize = 0;
@@ -47,7 +45,7 @@ export const TopDrawer: React.FC<PropsT> = props => {
       isInitialPeek={isInitialPeek}
       enableNonSlideOpen={true}
       nonSlideOpen={nonSlideOpen}
-      enableFadeBackground={enableFadeBackground}
+      enableFadeBackground={true}
       onFadeBackgroundPress={onFadeBackgroundPress}>
       <TopDrawerContent peekSize={peekSize} />
     </SlidingDrawer>
