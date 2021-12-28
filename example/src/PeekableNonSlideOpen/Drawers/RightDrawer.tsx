@@ -25,7 +25,7 @@ type PropsT = {
 export const RightDrawer: React.FC<PropsT> = props => {
   const {onDrawerOpen, onDrawerPeek, isInitialPeek, nonSlideOpen} = props;
   const peekSize = 95;
-  const openSize = 200;
+  const openSize = 240;
 
   return (
     <SlidingDrawer

@@ -23,7 +23,7 @@ type PropsT = {
 export const TopDrawer: React.FC<PropsT> = props => {
   const {onDrawerPeek, nonSlideOpen} = props;
   const peekSize = 0;
-  const openSize = 250;
+  const openSize = 240;
 
   return (
     <SlidingDrawer

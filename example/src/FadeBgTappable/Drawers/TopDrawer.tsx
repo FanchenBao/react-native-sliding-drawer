@@ -31,8 +31,8 @@ export const TopDrawer: React.FC<PropsT> = props => {
     nonSlideOpen,
     onFadeBackgroundPress,
   } = props;
-  const peekSize = 80;
-  const openSize = 250;
+  const peekSize = 95;
+  const openSize = 240;
 
   return (
     <SlidingDrawer

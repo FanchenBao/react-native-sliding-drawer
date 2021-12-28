@@ -17,7 +17,7 @@ import {RightDrawerContent} from '../../DrawerContent/index';
  */
 export const RightDrawer: React.FC = () => {
   const peekSize = 95;
-  const openSize = 200;
+  const openSize = 240;
 
   return (
     <SlidingDrawer

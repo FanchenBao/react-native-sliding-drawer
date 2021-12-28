@@ -16,8 +16,8 @@ import {BottomDrawerContent} from '../../DrawerContent/index';
  * Example for a bottom drawer
  */
 export const BottomDrawer: React.FC = () => {
-  const peekSize = 80;
-  const openSize = 250;
+  const peekSize = 95;
+  const openSize = 240;
 
   return (
     <SlidingDrawer

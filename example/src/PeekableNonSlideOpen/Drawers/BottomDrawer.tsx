@@ -24,8 +24,8 @@ type PropsT = {
  */
 export const BottomDrawer: React.FC<PropsT> = props => {
   const {onDrawerOpen, onDrawerPeek, isInitialPeek, nonSlideOpen} = props;
-  const peekSize = 80;
-  const openSize = 250;
+  const peekSize = 95;
+  const openSize = 240;
 
   return (
     <SlidingDrawer

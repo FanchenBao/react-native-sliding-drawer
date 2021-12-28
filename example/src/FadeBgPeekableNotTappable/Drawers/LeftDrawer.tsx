@@ -17,7 +17,7 @@ import {LeftDrawerContent} from '../../DrawerContent/index';
  */
 export const LeftDrawer: React.FC = () => {
   const peekSize = 95;
-  const openSize = 200;
+  const openSize = 240;
 
   return (
     <SlidingDrawer
