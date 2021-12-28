@@ -9,23 +9,19 @@
  */
 
 import * as React from 'react';
-import {View, SafeAreaView} from 'react-native';
 import {display} from './display';
-import {styles} from './styles';
 import {DrawerChoices} from '../DrawerChoices';
 
 export const FadeBgPeekableBgNotTappable = () => {
   const [selectedDrawer, setSelectedDrawer] = React.useState('bottom');
 
   return (
-    <SafeAreaView style={styles.backgroundStyle}>
-      <View style={styles.content}>
-        <DrawerChoices
-          selectedDrawer={selectedDrawer}
-          onChoicePress={setSelectedDrawer}
-        />
-        {display(selectedDrawer)}
-      </View>
-    </SafeAreaView>
+    <>
+      <DrawerChoices
+        selectedDrawer={selectedDrawer}
+        onChoicePress={setSelectedDrawer}
+      />
+      {display(selectedDrawer)}
+    </>
   );
 };

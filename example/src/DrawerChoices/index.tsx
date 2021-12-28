@@ -32,32 +32,30 @@ export const DrawerChoices: React.FC<PropsT> = props => {
   return (
     <View style={styles.interactContainer}>
       <View style={styles.chooseDrawerContainer}>
-        <View style={styles.drawerOptionsContainer}>
-          {['bottom', 'top', 'left', 'right'].map(loc => {
-            return (
-              <TouchableOpacity
-                key={loc}
-                style={[
-                  styles.drawerOption,
-                  {
-                    backgroundColor:
-                      loc === selectedDrawer ? 'black' : 'lightgrey',
-                  },
-                ]}
-                onPress={() => onChoicePress(loc)}>
-                <Text
-                  style={{
-                    color: loc === selectedDrawer ? 'white' : 'black',
-                  }}>
-                  {loc}
-                </Text>
-              </TouchableOpacity>
-            );
-          })}
-        </View>
+        {['bottom', 'top', 'left', 'right'].map(loc => {
+          return (
+            <TouchableOpacity
+              key={loc}
+              style={[
+                styles.drawerOption,
+                {
+                  backgroundColor:
+                    loc === selectedDrawer ? 'black' : 'lightgrey',
+                },
+              ]}
+              onPress={() => onChoicePress(loc)}>
+              <Text
+                style={{
+                  color: loc === selectedDrawer ? 'white' : 'black',
+                }}>
+                {loc}
+              </Text>
+            </TouchableOpacity>
+          );
+        })}
       </View>
 
-      {enableNonSlideOpen && (
+      {enableNonSlideOpen ? (
         <TouchableOpacity
           style={[
             styles.button,
@@ -68,6 +66,8 @@ export const DrawerChoices: React.FC<PropsT> = props => {
             {isInitialPeek ? 'Open' : 'Close'}
           </Text>
         </TouchableOpacity>
+      ) : (
+        <View style={[styles.button, {borderWidth: 0}]} />
       )}
     </View>
   );

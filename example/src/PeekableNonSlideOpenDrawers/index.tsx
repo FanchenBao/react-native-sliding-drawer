@@ -9,9 +9,7 @@
  */
 
 import * as React from 'react';
-import {View, SafeAreaView} from 'react-native';
 import {display} from './display';
-import {styles} from './styles';
 import {DrawerChoices} from '../DrawerChoices';
 
 export const PeekableNonSlideOpenDrawers = () => {
@@ -20,29 +18,27 @@ export const PeekableNonSlideOpenDrawers = () => {
   const [nonSlideOpen, setNonSlideOpen] = React.useState(false);
 
   return (
-    <SafeAreaView style={styles.backgroundStyle}>
-      <View style={styles.content}>
-        <DrawerChoices
-          selectedDrawer={selectedDrawer}
-          onChoicePress={setSelectedDrawer}
-          enableNonSlideOpen={true}
-          isInitialPeek={isInitialPeek}
-          onNonSlideOpenButtonPress={() => setNonSlideOpen(!nonSlideOpen)}
-        />
-        {display(
-          selectedDrawer,
-          nonSlideOpen,
-          isInitialPeek,
-          () => {
-            setIsInitialPeek(false);
-            setNonSlideOpen(true);
-          },
-          () => {
-            setIsInitialPeek(true);
-            setNonSlideOpen(false);
-          },
-        )}
-      </View>
-    </SafeAreaView>
+    <>
+      <DrawerChoices
+        selectedDrawer={selectedDrawer}
+        onChoicePress={setSelectedDrawer}
+        enableNonSlideOpen={true}
+        isInitialPeek={isInitialPeek}
+        onNonSlideOpenButtonPress={() => setNonSlideOpen(!nonSlideOpen)}
+      />
+      {display(
+        selectedDrawer,
+        nonSlideOpen,
+        isInitialPeek,
+        () => {
+          setIsInitialPeek(false);
+          setNonSlideOpen(true);
+        },
+        () => {
+          setIsInitialPeek(true);
+          setNonSlideOpen(false);
+        },
+      )}
+    </>
   );
 };

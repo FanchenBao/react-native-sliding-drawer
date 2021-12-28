@@ -12,20 +12,14 @@ import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   interactContainer: {
-    // flexDirection: 'row',
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    marginTop: 100,
+    // borderWidth: 1,
+    // borderColor: 'blue',
   },
   chooseDrawerContainer: {
-    // borderWidth: 1,
-    // borderColor: 'black',
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 5,
-  },
-  drawerOptionsContainer: {
-    marginVertical: 10,
+    // borderWidth: 1,
+    // borderColor: 'red',
   },
   drawerOption: {
     borderWidth: 1,

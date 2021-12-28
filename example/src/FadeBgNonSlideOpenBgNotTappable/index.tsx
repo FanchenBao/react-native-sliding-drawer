@@ -9,9 +9,7 @@
  */
 
 import * as React from 'react';
-import {View, SafeAreaView} from 'react-native';
 import {display} from './display';
-import {styles} from './styles';
 import {DrawerChoices} from '../DrawerChoices';
 
 export const FadeBgNonSlideOpenBgNotTappable = () => {
@@ -19,16 +17,14 @@ export const FadeBgNonSlideOpenBgNotTappable = () => {
   const [nonSlideOpen, setNonSlideOpen] = React.useState(false);
 
   return (
-    <SafeAreaView style={styles.backgroundStyle}>
-      <View style={styles.content}>
-        <DrawerChoices
-          selectedDrawer={selectedDrawer}
-          onChoicePress={setSelectedDrawer}
-          enableNonSlideOpen={true}
-          onNonSlideOpenButtonPress={() => setNonSlideOpen(!nonSlideOpen)}
-        />
-        {display(selectedDrawer, nonSlideOpen, () => setNonSlideOpen(false))}
-      </View>
-    </SafeAreaView>
+    <>
+      <DrawerChoices
+        selectedDrawer={selectedDrawer}
+        onChoicePress={setSelectedDrawer}
+        enableNonSlideOpen={true}
+        onNonSlideOpenButtonPress={() => setNonSlideOpen(!nonSlideOpen)}
+      />
+      {display(selectedDrawer, nonSlideOpen, () => setNonSlideOpen(false))}
+    </>
   );
 };

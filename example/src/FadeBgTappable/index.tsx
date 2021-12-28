@@ -9,9 +9,7 @@
  */
 
 import * as React from 'react';
-import {View, SafeAreaView} from 'react-native';
 import {display} from './display';
-import {styles} from './styles';
 import {DrawerChoices} from '../DrawerChoices';
 
 export const FadeBgTappable = () => {
@@ -33,31 +31,29 @@ export const FadeBgTappable = () => {
   const [dummy, setDummy] = React.useState(true);
 
   return (
-    <SafeAreaView style={styles.backgroundStyle}>
-      <View style={styles.content}>
-        <DrawerChoices
-          selectedDrawer={selectedDrawer}
-          onChoicePress={setSelectedDrawer}
-          enableNonSlideOpen={true}
-          isInitialPeek={isInitialPeek}
-          onNonSlideOpenButtonPress={() => setNonSlideOpen(!nonSlideOpen)}
-        />
-        {display(
-          selectedDrawer,
-          nonSlideOpen,
-          isInitialPeek,
-          () => {
-            setIsInitialPeek(false);
-            setNonSlideOpen(true);
-            setDummy(!dummy);
-          },
-          () => {
-            setIsInitialPeek(true);
-            setNonSlideOpen(false);
-          },
-          () => setNonSlideOpen(false),
-        )}
-      </View>
-    </SafeAreaView>
+    <>
+      <DrawerChoices
+        selectedDrawer={selectedDrawer}
+        onChoicePress={setSelectedDrawer}
+        enableNonSlideOpen={true}
+        isInitialPeek={isInitialPeek}
+        onNonSlideOpenButtonPress={() => setNonSlideOpen(!nonSlideOpen)}
+      />
+      {display(
+        selectedDrawer,
+        nonSlideOpen,
+        isInitialPeek,
+        () => {
+          setIsInitialPeek(false);
+          setNonSlideOpen(true);
+          setDummy(!dummy);
+        },
+        () => {
+          setIsInitialPeek(true);
+          setNonSlideOpen(false);
+        },
+        () => setNonSlideOpen(false),
+      )}
+    </>
   );
 };
