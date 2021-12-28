@@ -6,7 +6,13 @@
  */
 
 import * as React from 'react';
-import {Platform} from 'react-native';
+import {
+  Platform,
+  View,
+  NativeModules,
+  StatusBar,
+  useWindowDimensions,
+} from 'react-native';
 import {DynamicDrawer} from './dynamicDrawer';
 import {StaticDrawer} from './staticDrawer';
 
@@ -15,12 +21,6 @@ type PropsT = {
   peekSize: number; // peek state width or height.
   openSize: number; // open state width or height.
   fixedLoc: 'top' | 'bottom' | 'left' | 'right'; // Where the drawer is fixed at. Top drawer means sliding downwards, bottom upwards, left rightwards, right leftwards.
-  screenDim: {
-    width: number; // total width of screen
-    topBar: number; // top bar height
-    bottomBar: number; // bottom bar height (iOS only. This value is 0 in android)
-    totalHeight: number; // total height of screen
-  }; // Dimension of the screen size. Height refers to the screen in between the top and bottmo bar in iOS.
   drawerWidth?: number; // manual override of drawer width, applicable when fixedLoc === 'top' | 'bottom'
   drawerHeight?: number; // manual override of drawer height, applicable when fixedLoc === 'right' | 'left'
   maxPct?: number; // maximum pct of width or height allowed for a user to drag the drawer.
@@ -53,7 +53,6 @@ export const SlidingDrawer: React.FC<PropsT> = props => {
     peekSize,
     openSize,
     fixedLoc,
-    screenDim,
     drawerWidth = -1,
     drawerHeight = -1,
     maxPct = 0.5,
@@ -77,14 +76,6 @@ export const SlidingDrawer: React.FC<PropsT> = props => {
       // Default no-op function
     },
   } = props;
-  const isVertical = ['top', 'bottom'].includes(fixedLoc);
-  const size = isVertical ? screenDim.totalHeight : screenDim.width;
-
-  if (maxPct * size < openSize || openSize < peekSize) {
-    throw new Error(
-      'Wrong Peekable Drawer set up. openSize must not be smaller than peekSize; maxPct times size must not be smaller than openSize',
-    );
-  }
 
   // State is the height of the drawer
   const DrawerState = React.useMemo(
@@ -94,6 +85,99 @@ export const SlidingDrawer: React.FC<PropsT> = props => {
     }),
     [openSize, peekSize],
   );
+
+  /**
+   * NOTE: Obtain Screen Dimension
+   *
+   * The screen width and total height can be obtained from useWindowDimensions
+   * While width is the entire width of a device for both Android and iOS,
+   * height is interpreted differently. In iOS, height from useWindowDimensions
+   * is the total height of the device, including the top bar (status bar),
+   * screen height, and bottom bar. In Android, height is just the screen,
+   * not counting the top bar (there is no bottom bar in Android). Thus, to
+   * compute the total screen height of Android, we use
+   * useWindowDimensions().height + top bar height.
+   *
+   * For iOS, we want to know the bottom bar height. One way to do so is to
+   * render a dummy view and use its ref to call ref.current.measure(). In its
+   * callback, we get access to the height of the dummy view and its absolute
+   * y position relative to the entire device. Note that onLayout does not work
+   * because it only returns relative y position. Also note that we need the
+   * dummy view to extend all the way to the bottom of the screen, so its style
+   * needs to include {flex: 1}. Interestingly, as the dummy view extends to the
+   * bottom, it does not go beyond the bottom bar. Thus when we do the absolute
+   * y position plus the dummy view height, we get the screen height from above
+   * the top bar to above the bottom bar. Thus, the bottom bar height is the
+   * total height minus the newly acquired height.
+   */
+  const [initializing, setInitializing] = React.useState(true);
+  const {height, width} = useWindowDimensions();
+  const [screenDim, setScreenDim] = React.useState({
+    width: -1,
+    totalHeight: -1,
+    topBar: -1,
+    bottomBar: -1,
+  });
+  const iniRef = React.useRef<View>(null);
+
+  React.useEffect(() => {
+    if (
+      initializing &&
+      Object.keys(screenDim).every(
+        k => screenDim[k as keyof typeof screenDim] >= 0,
+      )
+    ) {
+      setInitializing(false);
+    }
+  }, [initializing, setInitializing, screenDim]);
+
+  if (initializing) {
+    // Grabing screen dimension, including the top and bottom bar height
+    return (
+      <View
+        ref={iniRef}
+        style={{position: 'absolute', height: '100%'}}
+        onLayout={_ => {
+          if (iniRef.current) {
+            iniRef.current.measure((__, ___, ____, height_, _____, pageY) => {
+              // pageX and pageY are the absolute X and Y position relative to
+              // the entire device (i.e. page)
+              if (Platform.OS === 'ios') {
+                NativeModules.StatusBarManager.getHeight(
+                  (h: {height: number}) => {
+                    setScreenDim({
+                      topBar: h.height,
+                      bottomBar: height - height_ - pageY,
+                      totalHeight: height,
+                      width: width,
+                    });
+                  },
+                );
+              } else {
+                setScreenDim({
+                  topBar: StatusBar.currentHeight ? StatusBar.currentHeight : 0,
+                  bottomBar: 0,
+                  totalHeight:
+                    height +
+                    (StatusBar.currentHeight ? StatusBar.currentHeight : 0),
+                  width: width,
+                });
+              }
+            });
+          }
+        }}
+      />
+    );
+  }
+
+  const isVertical = ['top', 'bottom'].includes(fixedLoc);
+  const size = isVertical ? screenDim.totalHeight : screenDim.width;
+
+  if (maxPct * size < openSize || openSize < peekSize) {
+    throw new Error(
+      'Wrong Peekable Drawer set up. openSize must not be smaller than peekSize; maxPct times size must not be smaller than openSize',
+    );
+  }
 
   const getStyles = () => {
     switch (fixedLoc) {
@@ -119,21 +203,17 @@ export const SlidingDrawer: React.FC<PropsT> = props => {
         };
       case 'left':
         return {
+          top: Platform.OS === 'ios' ? -screenDim.topBar : 0,
           width: size,
-          height:
-            drawerHeight < 0
-              ? screenDim.totalHeight - screenDim.topBar
-              : drawerHeight,
+          height: drawerHeight < 0 ? screenDim.totalHeight : drawerHeight,
           right: size - (isInitialPeek ? DrawerState.Peek : DrawerState.Open),
           elevation: elevation,
         };
       case 'right':
         return {
+          top: Platform.OS === 'ios' ? -screenDim.topBar : 0,
           width: size,
-          height:
-            drawerHeight < 0
-              ? screenDim.totalHeight - screenDim.topBar
-              : drawerHeight,
+          height: drawerHeight < 0 ? screenDim.totalHeight : drawerHeight,
           left: size - (isInitialPeek ? DrawerState.Peek : DrawerState.Open),
           elevation: elevation,
         };

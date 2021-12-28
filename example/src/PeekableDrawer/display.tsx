@@ -16,27 +16,18 @@ import {RightDrawer} from './Drawers/RightDrawer';
 /**
  * A function to help display the peekableDrawer
  * @param drawer Name of drawer to be displayed.
- * @param screenDim Dimension of the screen.
  * @returns A sliding drawer component
  */
-export const display = (
-  drawer: string,
-  screenDim: {
-    width: number;
-    totalHeight: number;
-    topBar: number;
-    bottomBar: number;
-  },
-) => {
+export const display = (drawer: string) => {
   switch (drawer) {
     case 'top':
-      return <TopDrawer screenDim={screenDim} />;
+      return <TopDrawer />;
     case 'bottom':
-      return <BottomDrawer screenDim={screenDim} />;
+      return <BottomDrawer />;
     case 'left':
-      return <LeftDrawer screenDim={screenDim} />;
+      return <LeftDrawer />;
     case 'right':
-      return <RightDrawer screenDim={screenDim} />;
+      return <RightDrawer />;
     default:
       return null;
   }

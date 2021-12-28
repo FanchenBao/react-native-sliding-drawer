@@ -13,12 +13,6 @@ import {SlidingDrawer} from '../../../react-native-sliding-drawer';
 import {BottomDrawerContent} from '../../DrawerContent/index';
 
 type PropsT = {
-  screenDim: {
-    totalHeight: number;
-    width: number;
-    topBar: number;
-    bottomBar: number;
-  };
   isInitialPeek: boolean;
   onDrawerOpen: () => void;
   onDrawerPeek: () => void;
@@ -29,14 +23,12 @@ type PropsT = {
  * Example for a bottom drawer
  */
 export const BottomDrawer: React.FC<PropsT> = props => {
-  const {screenDim, onDrawerOpen, onDrawerPeek, isInitialPeek, nonSlideOpen} =
-    props;
+  const {onDrawerOpen, onDrawerPeek, isInitialPeek, nonSlideOpen} = props;
   const peekSize = 80;
   const openSize = 250;
 
   return (
     <SlidingDrawer
-      screenDim={screenDim}
       peekSize={peekSize}
       openSize={openSize}
       fixedLoc="bottom"

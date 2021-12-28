@@ -13,12 +13,6 @@ import {SlidingDrawer} from '../../../react-native-sliding-drawer';
 import {LeftDrawerContent} from '../../DrawerContent/index';
 
 type PropsT = {
-  screenDim: {
-    totalHeight: number;
-    width: number;
-    topBar: number;
-    bottomBar: number;
-  };
   isInitialPeek: boolean;
   onDrawerOpen: () => void;
   onDrawerPeek: () => void;
@@ -29,14 +23,12 @@ type PropsT = {
  * Example for a left drawer
  */
 export const LeftDrawer: React.FC<PropsT> = props => {
-  const {screenDim, onDrawerOpen, onDrawerPeek, isInitialPeek, nonSlideOpen} =
-    props;
+  const {onDrawerOpen, onDrawerPeek, isInitialPeek, nonSlideOpen} = props;
   const peekSize = 0;
   const openSize = 200;
 
   return (
     <SlidingDrawer
-      screenDim={screenDim}
       peekSize={peekSize}
       openSize={openSize}
       fixedLoc="left"
@@ -46,7 +38,7 @@ export const LeftDrawer: React.FC<PropsT> = props => {
       isInitialPeek={isInitialPeek}
       enableNonSlideOpen={true}
       nonSlideOpen={nonSlideOpen}
-      maxPct={0.6}>
+      maxPct={0.7}>
       <LeftDrawerContent peekSize={peekSize} />
     </SlidingDrawer>
   );

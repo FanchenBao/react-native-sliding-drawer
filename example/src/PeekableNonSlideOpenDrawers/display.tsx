@@ -16,7 +16,6 @@ import {RightDrawer} from './Drawers/RightDrawer';
 /**
  * A function to help display the peekable nonSlideOpenDrawers
  * @param drawer Name of drawer to be displayed.
- * @param screenDim Dimension of the screen.
  * @param nonSlideOpen Determines whether the drawer shall be at the open or
  * peek state. true = slide at open state, false = slide at peek state
  * @param isInitialPeek Whether the initial state of the drawer is at peek.
@@ -31,12 +30,6 @@ import {RightDrawer} from './Drawers/RightDrawer';
  */
 export const display = (
   drawer: string,
-  screenDim: {
-    width: number;
-    totalHeight: number;
-    topBar: number;
-    bottomBar: number;
-  },
   nonSlideOpen: boolean,
   isInitialPeek: boolean,
   onDrawerOpen: () => void,
@@ -46,7 +39,6 @@ export const display = (
     case 'top':
       return (
         <TopDrawer
-          screenDim={screenDim}
           isInitialPeek={isInitialPeek}
           onDrawerOpen={onDrawerOpen}
           onDrawerPeek={onDrawerPeek}
@@ -56,7 +48,6 @@ export const display = (
     case 'bottom':
       return (
         <BottomDrawer
-          screenDim={screenDim}
           isInitialPeek={isInitialPeek}
           onDrawerOpen={onDrawerOpen}
           onDrawerPeek={onDrawerPeek}
@@ -66,7 +57,6 @@ export const display = (
     case 'left':
       return (
         <LeftDrawer
-          screenDim={screenDim}
           isInitialPeek={isInitialPeek}
           onDrawerOpen={onDrawerOpen}
           onDrawerPeek={onDrawerPeek}
@@ -76,7 +66,6 @@ export const display = (
     case 'right':
       return (
         <RightDrawer
-          screenDim={screenDim}
           isInitialPeek={isInitialPeek}
           onDrawerOpen={onDrawerOpen}
           onDrawerPeek={onDrawerPeek}

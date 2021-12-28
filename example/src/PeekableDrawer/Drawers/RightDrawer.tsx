@@ -12,31 +12,20 @@ import * as React from 'react';
 import {SlidingDrawer} from '../../../react-native-sliding-drawer';
 import {RightDrawerContent} from '../../DrawerContent/index';
 
-type PropsT = {
-  screenDim: {
-    totalHeight: number;
-    width: number;
-    topBar: number;
-    bottomBar: number;
-  };
-};
-
 /**
  * Example for a right drawer
  */
-export const RightDrawer: React.FC<PropsT> = props => {
-  const {screenDim} = props;
+export const RightDrawer: React.FC = () => {
   const peekSize = 95;
   const openSize = 200;
 
   return (
     <SlidingDrawer
-      screenDim={screenDim}
       peekSize={peekSize}
       openSize={openSize}
       fixedLoc="right"
       expandable={true}
-      maxPct={0.6}>
+      maxPct={0.7}>
       <RightDrawerContent peekSize={peekSize} />
     </SlidingDrawer>
   );

@@ -65,6 +65,7 @@ export const LeftDrawerContent: React.FC<{peekSize: number}> = props => {
             alignItems: 'flex-end',
             backgroundColor: 'rgba(165, 42, 42, 0.6)',
             borderRadius: peekSize > 0 ? 0 : 15,
+            paddingTop: 30,
           },
         ]}>
         <Text>{'Left\nOpen\nSection'}</Text>
@@ -75,7 +76,7 @@ export const LeftDrawerContent: React.FC<{peekSize: number}> = props => {
           <View
             style={[
               styles.peekContainer,
-              {width: peekSize, alignItems: 'flex-end'},
+              {width: peekSize, alignItems: 'flex-end', paddingTop: 30},
             ]}>
             <Text>{'Left\nPeekable\nSection'}</Text>
           </View>
@@ -99,7 +100,8 @@ export const RightDrawerContent: React.FC<{peekSize: number}> = props => {
       ]}>
       {peekSize > 0 && (
         <>
-          <View style={[styles.peekContainer, {width: peekSize}]}>
+          <View
+            style={[styles.peekContainer, {width: peekSize, paddingTop: 30}]}>
             <Text>{'Right\nPeekable\nSection'}</Text>
           </View>
           <View style={styles.separator} />
@@ -112,6 +114,7 @@ export const RightDrawerContent: React.FC<{peekSize: number}> = props => {
             flex: 1,
             backgroundColor: 'rgba(0, 128, 0, 0.6)',
             borderRadius: peekSize > 0 ? 0 : 15,
+            paddingTop: 30,
           },
         ]}>
         <Text>{'Right\nOpen\nSection'}</Text>
