@@ -13,6 +13,7 @@ import {View, TouchableOpacity, Text, useWindowDimensions} from 'react-native';
 import {NonSlideOpenDrawers} from './src/NonSlideOpenDrawers/index';
 import {PeekableDrawer} from './src/PeekableDrawer';
 import {PeekableNonSlideOpenDrawers} from './src/PeekableNonSlideOpenDrawers';
+import {FadeBgNonSlideOpenBgNotTappable} from './src/FadeBgNonSlideOpenBgNotTappable';
 import {FadeBgNonSlideOpenBgTappable} from './src/FadeBgNonSlideOpenBgTappable';
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
     Peekable: <PeekableDrawer />,
     NonSlideOpen: <NonSlideOpenDrawers />,
     PeekableNonSlideOpen: <PeekableNonSlideOpenDrawers />,
+    FadeBgNonSlideOpenBgNotTappable: <FadeBgNonSlideOpenBgNotTappable />,
     FadeBgNonSlideOpenBgTappable: <FadeBgNonSlideOpenBgTappable />,
   };
   const [selectedDemo, setSelectedDemo] =

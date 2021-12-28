@@ -26,6 +26,8 @@ import {RightDrawer} from './Drawers/RightDrawer';
  * state value for the drawer.
  * @param onDrawerPeek Callback when the drawer is peek, same general purpose
  * as onDrawerOpen.
+ * @param enableFadeBackground Whether to enable fade background.
+ * @param onFadeBackgroundPress Callack when the fade background is pressed
  * @returns A sliding drawer component
  */
 export const display = (
