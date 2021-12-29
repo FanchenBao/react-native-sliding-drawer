@@ -24,7 +24,6 @@ export const BottomDrawer: React.FC = () => {
       peekSize={peekSize}
       openSize={openSize}
       fixedLoc="bottom"
-      expandable={true}
       enableFadeBackground={true}>
       <BottomDrawerContent peekSize={peekSize} />
     </SlidingDrawer>

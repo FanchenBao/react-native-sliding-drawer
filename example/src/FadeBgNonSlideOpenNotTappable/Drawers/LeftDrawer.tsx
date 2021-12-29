@@ -30,7 +30,6 @@ export const LeftDrawer: React.FC<PropsT> = props => {
       peekSize={peekSize}
       openSize={openSize}
       fixedLoc="left"
-      expandable={true}
       onDrawerPeek={onDrawerPeek}
       enableNonSlideOpen={true}
       nonSlideOpen={nonSlideOpen}

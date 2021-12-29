@@ -32,7 +32,6 @@ export const TopDrawer: React.FC<PropsT> = props => {
       peekSize={peekSize}
       openSize={openSize}
       fixedLoc="top"
-      expandable={true}
       onDrawerOpen={onDrawerOpen}
       onDrawerPeek={onDrawerPeek}
       isInitialPeek={isInitialPeek}

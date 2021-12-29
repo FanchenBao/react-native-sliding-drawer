@@ -20,11 +20,7 @@ export const TopDrawer: React.FC = () => {
   const openSize = 240;
 
   return (
-    <SlidingDrawer
-      peekSize={peekSize}
-      openSize={openSize}
-      fixedLoc="top"
-      expandable={true}>
+    <SlidingDrawer peekSize={peekSize} openSize={openSize} fixedLoc="top">
       <TopDrawerContent peekSize={peekSize} />
     </SlidingDrawer>
   );

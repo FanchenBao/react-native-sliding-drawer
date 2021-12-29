@@ -24,7 +24,6 @@ export const RightDrawer: React.FC = () => {
       peekSize={peekSize}
       openSize={openSize}
       fixedLoc="right"
-      expandable={true}
       maxPct={0.7}>
       <RightDrawerContent peekSize={peekSize} />
     </SlidingDrawer>

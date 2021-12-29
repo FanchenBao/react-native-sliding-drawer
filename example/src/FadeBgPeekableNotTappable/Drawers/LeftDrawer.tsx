@@ -24,7 +24,6 @@ export const LeftDrawer: React.FC = () => {
       peekSize={peekSize}
       openSize={openSize}
       fixedLoc="left"
-      expandable={true}
       maxPct={0.7}
       enableFadeBackground={true}>
       <LeftDrawerContent peekSize={peekSize} />

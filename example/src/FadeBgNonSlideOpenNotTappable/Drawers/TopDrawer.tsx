@@ -30,7 +30,6 @@ export const TopDrawer: React.FC<PropsT> = props => {
       peekSize={peekSize}
       openSize={openSize}
       fixedLoc="top"
-      expandable={true}
       onDrawerPeek={onDrawerPeek}
       enableNonSlideOpen={true}
       nonSlideOpen={nonSlideOpen}

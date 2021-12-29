@@ -30,7 +30,6 @@ export const BottomDrawer: React.FC<PropsT> = props => {
       peekSize={peekSize}
       openSize={openSize}
       fixedLoc="bottom"
-      expandable={true}
       onDrawerPeek={onDrawerPeek}
       enableNonSlideOpen={true}
       nonSlideOpen={nonSlideOpen}

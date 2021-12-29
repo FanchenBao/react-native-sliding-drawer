@@ -20,11 +20,7 @@ export const BottomDrawer: React.FC = () => {
   const openSize = 240;
 
   return (
-    <SlidingDrawer
-      peekSize={peekSize}
-      openSize={openSize}
-      fixedLoc="bottom"
-      expandable={true}>
+    <SlidingDrawer peekSize={peekSize} openSize={openSize} fixedLoc="bottom">
       <BottomDrawerContent peekSize={peekSize} />
     </SlidingDrawer>
   );

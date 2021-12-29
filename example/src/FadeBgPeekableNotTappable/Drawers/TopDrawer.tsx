@@ -24,7 +24,6 @@ export const TopDrawer: React.FC = () => {
       peekSize={peekSize}
       openSize={openSize}
       fixedLoc="top"
-      expandable={true}
       enableFadeBackground={true}>
       <TopDrawerContent peekSize={peekSize} />
     </SlidingDrawer>
