@@ -22,7 +22,7 @@ switches from a non-expandable drawer to an expandable. I don't know that
 cause exactly, but it is most likely related to how Animate.View is
 implemented.
  */
-export const StaticDrawer: React.FC<PropsT> = (props) => {
+export const StaticDrawer: React.FC<PropsT> = props => {
   const {children, style} = props;
   return <View style={[{position: 'absolute'}, style]}>{children}</View>;
 };

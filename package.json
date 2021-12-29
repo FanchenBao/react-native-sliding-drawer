@@ -25,7 +25,7 @@
     "test": "jest",
     "typescript": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
-    "prepare": "bob build",
+    "prepare": "cp example/src/react-native-sliding-drawer/* src/ && bob build",
     "release": "release-it",
     "example": "yarn --cwd example",
     "pods": "cd example && pod-install --quiet",
@@ -129,9 +129,11 @@
     "quoteProps": "consistent",
     "singleQuote": true,
     "tabWidth": 2,
-    "trailingComma": "es5",
+    "trailingComma": "all",
     "useTabs": false,
-    "bracketSpacing": false
+    "jsxBracketSameLine": true,
+    "bracketSpacing": false,
+    "arrowParens": "avoid"
   },
   "react-native-builder-bob": {
     "source": "src",
