@@ -46,7 +46,7 @@ export const SlidingDrawer: React.FC<PropsT> = props => {
     drawerHeight = -1,
     maxPct = 0.5,
     sensitivity = 10,
-    expandable = false,
+    expandable = true,
     isInitialPeek = true,
     enableNonSlideOpen = false,
     nonSlideOpen = false,
