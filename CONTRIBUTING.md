@@ -12,13 +12,20 @@ yarn
 
 > While it's possible to use [`npm`](https://github.com/npm/cli), the tooling is built around [`yarn`](https://classic.yarnpkg.com/), so you'll have an easier time if you use `yarn` for development.
 
-While developing, you can run the [example app](/example/) to test your changes. Any changes you make in your library's JavaScript code will be reflected in the example app without a rebuild. If you change any native code, then you'll need to rebuild the example app.
-
-To start the packager:
+Before developing, one must set up the example app by going to the `example` folder and run:
 
 ```sh
-yarn example start
+npm install
 ```
+
+This will install the dependencies for running the example app. It is **CRUCIAL** to note that the source code is located in `example/src/react-native-sliding-drawer/*.tsx`, NOT `./src/*.tsx`. Regular development of sliding drawer should be conducted while the example app is running, because the app obtains the sliding drawer component directly from `example/src/react-native-sliding-drawer`. Once development is done, one shall go back to the root folder and run:
+
+```sh
+yarn run prepare
+```
+
+This command copies the source code from `example/src/react-native-sliding-drawer/*.tsx` to `./src/*.tsx` and build the package.
+
 
 To run the example app on Android:
 
@@ -30,12 +37,6 @@ To run the example app on iOS:
 
 ```sh
 yarn example ios
-```
-
-To run the example app on Web:
-
-```sh
-yarn example web
 ```
 
 Make sure your code passes TypeScript and ESLint. Run the following to verify:
