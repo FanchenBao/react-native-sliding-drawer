@@ -132,19 +132,19 @@ Same layout as PeekableNonSlideOpen, except that as the drawer opens up, the bac
 
 ## Run Examples
 
-Go to the `example` folder and run
+Go to the `example` folder and sets up the example app
 
 ```sh
 npm install
 ```
 
-This sets up the dependencies for the example app. Then in the root folder run the following for iOS
+Then go to the root folder to run the example app for iOS
 
 ```sh
 yarn example ios
 ```
 
-or this for Android
+or Android
 
 ```sh
 yarn example android

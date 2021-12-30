@@ -28,7 +28,6 @@ type PropsT = {
   onDrawerPeek: () => void; // callback when the drawer is in peek state.
   speed: number; // the speed config of Animation.spring() method. Default to 40.
   useNativeDriver: boolean; // whether to use native driver for animation. Default to false.
-  elevation: number; // In Android, setting position to absolute does not guarantee that the drawer will stay on top, if some component has some value set to elevation. Use this prop to create a higher evelation than any other components. Not applicable to iOS.
   enableFadeBackground: boolean; // A flag indicating whether a fade in background is visible upon drawer open
   maxFadeBackgroundOpacity: number; // The max opacity of the fade in background
   onFadeBackgroundPress: () => void; // callback when the fade in background is pressed. NOTE: currently peek the drawer onFadeBackgroundPress is NOT supported, because the animation on fade is messed up when isInitialPeek changes.
@@ -54,7 +53,6 @@ export const DynamicDrawer: React.FC<PropsT> = props => {
     onDrawerPeek,
     speed,
     useNativeDriver,
-    elevation,
     enableFadeBackground,
     maxFadeBackgroundOpacity,
     onFadeBackgroundPress,
@@ -334,7 +332,6 @@ export const DynamicDrawer: React.FC<PropsT> = props => {
             position: 'absolute',
             height: height,
             width: width,
-            elevation: elevation,
           }}>
           <TouchableOpacity
             onPress={() => onFadeBackgroundPress()}

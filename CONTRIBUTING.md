@@ -24,13 +24,21 @@ This will install the dependencies for running the example app. It is **CRUCIAL*
 yarn run prepare
 ```
 
-This command copies the source code from `example/src/react-native-sliding-drawer/*.tsx` to `./src/*.tsx`, build the package, and package it into a `react-native-sliding-drawer-x.x.x.tgz` file, where `x.x.x` is the version number. The `tgz` file is used for testing the installation of the package. To install it, go to the `example` folder and run:
+This command copies the source code from `example/src/react-native-sliding-drawer/*.tsx` to `./src/*.tsx` and build the package.
+
+Before releasing the package, one must test whether the package can be successfully installed and used. To do so, we run the following command under the root
+
+```sh
+npm pack
+```
+
+This packages the compiled code int a `react-native-sliding-drawer-x.x.x.tgz` file, where `x.x.x` is the version number. To install it, go to the `example` folder and run:
 
 ```sh
 npm install ../react-native-sliding-drawer-x.x.x.tgz
 ```
 
-Then in the example app, we can use sliding drawer by importing it directly from the package:
+Then in the example app, we can use sliding drawer by importing it directly from `node_modules`:
 
 ```javascript
 import {SlidingDrawer} from 'react-native-sliding-drawer'

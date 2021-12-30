@@ -5567,7 +5567,7 @@
     "nullthrows" "^1.1.1"
 
 "react-native-sliding-drawer@file:../react-native-sliding-drawer-0.1.0.tgz":
-  "integrity" "sha512-BrUpCLqyzL5ZQppCEwp0l1VGs418p15RkncpkU3t25vARVr0BHhWWpFtqfiUbb0AVZlkq0Hyn96c6qHqRodWFA=="
+  "integrity" "sha512-gw/Luqi7o/S/1v43bK4rc4YfSkeyzePPFJwmzRrsBbcAgJaHxjltWpqBRzeabKf3XV+Zek4mBZzaEQH6/UNrSA=="
   "resolved" "file:../react-native-sliding-drawer-0.1.0.tgz"
   "version" "0.1.0"
 
