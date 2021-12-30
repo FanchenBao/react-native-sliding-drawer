@@ -92,7 +92,6 @@ export default App;
 //   return (
 //     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
 //       <Text>Minimal Example</Text>
-
 //       <SlidingDrawer peekSize={peekSize} openSize={openSize} fixedLoc="bottom">
 //         <View style={{flex: 1, backgroundColor: 'red'}}>
 //           <View style={{height: peekSize, backgroundColor: 'pink'}}>

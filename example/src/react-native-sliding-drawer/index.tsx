@@ -25,9 +25,8 @@ type PropsT = {
   nonSlideOpen?: boolean; // If true, open the drawer without sliding. Otherwise, peek the drawer without sliding.
   onDrawerOpen?: () => void; // callback when the drawer is in open state. This callback CANNOT be state changes, because re-rendering when the drawer is not in the peek state would break its behavior.
   onDrawerPeek?: () => void; // callback when the drawer is in peek state. This callback CANNOT be state changes, because re-rendering when the drawer is not in the peek state would break its behavior.
-  speed?: number; // the speed config of Animation.spring() method. Default to 40.
+  speed?: number; // the speed config of Animation.spring() method. Default to 20.
   useNativeDriver?: boolean; // whether to use native driver for animation. Default to false.
-  elevation?: number; // In Android, setting position to absolute does not guarantee that the drawer will stay on top, if some component has some value set to elevation. Use this prop to create a higher evelation than any other components. Not applicable to iOS.
   enableFadeBackground?: boolean; // A flag indicating whether a fade in background is visible upon drawer open
   maxFadeBackgroundOpacity?: number; // The max opacity of the fade in background
   onFadeBackgroundPress?: () => void; // callback when the fade in background is pressed. NOTE: currently peek the drawer onFadeBackgroundPress is NOT supported, because the animation on fade is messed up when isInitialPeek changes.
@@ -58,7 +57,6 @@ export const SlidingDrawer: React.FC<PropsT> = props => {
     },
     speed = 20,
     useNativeDriver = false,
-    elevation = 200, // A very big elevation, should guarantee the drawer is on top of everything else
     enableFadeBackground = false,
     maxFadeBackgroundOpacity = 0.5,
     onFadeBackgroundPress = () => {
@@ -93,28 +91,24 @@ export const SlidingDrawer: React.FC<PropsT> = props => {
           width: drawerWidth < 0 ? width : drawerWidth,
           bottom:
             height - (isInitialPeek ? DrawerState.Peek : DrawerState.Open),
-          elevation: elevation,
         };
       case 'bottom':
         return {
           height: size,
           width: drawerWidth < 0 ? width : drawerWidth,
           top: height - (isInitialPeek ? DrawerState.Peek : DrawerState.Open),
-          elevation: elevation,
         };
       case 'left':
         return {
           width: size,
           height: drawerHeight < 0 ? height : drawerHeight,
           right: size - (isInitialPeek ? DrawerState.Peek : DrawerState.Open),
-          elevation: elevation,
         };
       case 'right':
         return {
           width: size,
           height: drawerHeight < 0 ? height : drawerHeight,
           left: size - (isInitialPeek ? DrawerState.Peek : DrawerState.Open),
-          elevation: elevation,
         };
       default:
         return {};
@@ -136,7 +130,6 @@ export const SlidingDrawer: React.FC<PropsT> = props => {
       onDrawerPeek={onDrawerPeek}
       speed={speed}
       useNativeDriver={useNativeDriver}
-      elevation={elevation}
       enableFadeBackground={enableFadeBackground}
       maxFadeBackgroundOpacity={maxFadeBackgroundOpacity}
       onFadeBackgroundPress={onFadeBackgroundPress}
