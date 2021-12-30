@@ -15,15 +15,22 @@ import {LeftDrawerContent} from '../../DrawerContent/index';
 type PropsT = {
   onDrawerPeek: () => void;
   nonSlideOpen: boolean;
+  hasPeekable: boolean;
 };
 
 /**
  * Example for a left drawer
  */
 export const LeftDrawer: React.FC<PropsT> = props => {
-  const {onDrawerPeek, nonSlideOpen} = props;
-  const peekSize = 0;
-  const openSize = 240;
+  const {onDrawerPeek, nonSlideOpen, hasPeekable} = props;
+  /**
+   * NOTE: openSize is modified as well, because openSize is NOT the
+   * size of the open section, but the size of the entire drawer after it is
+   * open. Since peekSize increases and the entire drawer includes the peekSize,
+   * openSize needs to increase as well.
+   */
+  const peekSize = 0 + (hasPeekable ? 90 : 0);
+  const openSize = 150 + (hasPeekable ? 90 : 0);
 
   return (
     <SlidingDrawer

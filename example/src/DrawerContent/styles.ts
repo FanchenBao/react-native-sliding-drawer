@@ -32,4 +32,15 @@ export const styles = StyleSheet.create({
     // borderWidth: 2,
     // borderColor: 'green',
   },
+  horiDrawerTextContainer: {
+    top: '20%',
+    width: 200,
+    alignItems: 'center',
+  },
+  leftTextRotation: {
+    transform: [{rotate: '270deg'}, {translateY: 80}], // hardcoded
+  },
+  rightTextRotation: {
+    transform: [{rotate: '270deg'}, {translateY: -80}], // hardcoded
+  },
 });

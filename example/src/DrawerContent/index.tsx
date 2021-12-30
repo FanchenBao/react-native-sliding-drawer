@@ -65,7 +65,9 @@ export const LeftDrawerContent: React.FC<{peekSize: number}> = props => {
             borderRadius: peekSize > 0 ? 0 : 15,
           },
         ]}>
-        <Text style={{top: '10%'}}>{'Left\nOpen\nSection'}</Text>
+        <View style={[styles.horiDrawerTextContainer, styles.leftTextRotation]}>
+          <Text>{'Left Open Section'}</Text>
+        </View>
       </View>
       {peekSize > 0 && (
         <>
@@ -75,7 +77,10 @@ export const LeftDrawerContent: React.FC<{peekSize: number}> = props => {
               styles.peekContainer,
               {width: peekSize, alignItems: 'flex-end'},
             ]}>
-            <Text style={{top: '10%'}}>{'Left\nPeekable\nSection'}</Text>
+            <View
+              style={[styles.horiDrawerTextContainer, styles.leftTextRotation]}>
+              <Text>{'Left Peekable Section'}</Text>
+            </View>
           </View>
         </>
       )}
@@ -96,9 +101,14 @@ export const RightDrawerContent: React.FC<{peekSize: number}> = props => {
       ]}>
       {peekSize > 0 && (
         <>
-          <View
-            style={[styles.peekContainer, {width: peekSize, paddingTop: 30}]}>
-            <Text style={{top: '10%'}}>{'Right\nPeekable\nSection'}</Text>
+          <View style={[styles.peekContainer, {width: peekSize}]}>
+            <View
+              style={[
+                styles.horiDrawerTextContainer,
+                styles.rightTextRotation,
+              ]}>
+              <Text>{'Right Peekable Section'}</Text>
+            </View>
           </View>
           <View style={styles.separator} />
         </>
@@ -113,7 +123,10 @@ export const RightDrawerContent: React.FC<{peekSize: number}> = props => {
             paddingTop: 30,
           },
         ]}>
-        <Text style={{top: '10%'}}>{'Right\nOpen\nSection'}</Text>
+        <View
+          style={[styles.horiDrawerTextContainer, styles.rightTextRotation]}>
+          <Text>{'Right Peekable Section'}</Text>
+        </View>
       </View>
     </View>
   );

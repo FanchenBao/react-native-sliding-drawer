@@ -19,15 +19,19 @@ npm install react-native-sliding-drawer
 A minimal workable example is shown below. It can also be found in `example/App.tsx`.
 
 ```js
-import * as React from 'react';
-import {View, Text} from 'react-native';
 import {SlidingDrawer} from 'react-native-sliding-drawer';
 
 const App = () => {
   const peekSize = 90;
   const openSize = 270;
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'yellow',
+      }}>
       <Text>Minimal Example</Text>
       <SlidingDrawer peekSize={peekSize} openSize={openSize} fixedLoc="bottom">
         <View style={{flex: 1, backgroundColor: 'red'}}>
@@ -157,7 +161,7 @@ Comment and uncomment appropriate source code in [`App.tsx`](./example/App.tsx) 
 | Props                      | Type                                     | Default    | Note                                                                                                                                                                                           |
 |----------------------------|------------------------------------------|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `peekSize`                 | `number`                                 | (required) | The height of the visible section of the drawer after it is closed. This is also referred to as the peek section. If set to 0, the drawer completely disappears after it is closed.            |
-| `openSize`                 | `number`                                 | (required) | The height of the entire visible drawer's after it is opened. Note that this is NOT the height of the drawer's open section, but the sum of the heights of the peek and open sections.         |
+| `openSize`                 | `number`                                 | (required) | The height of the entire visible drawer's after it is opened. Note that this is **NOT** the height of the drawer's open section, but the sum of the heights of the peek and open sections.         |
 | `fixedLoc`                 | `'top' \| 'bottom' \| 'left' \| 'right'` | (required) | The location where the sliding drawer is located. Can only be one of the four allowed strings.                                                                                                 |
 | `drawerWidth`              | `number`                                 | `-1`       | Manual override of the drawer's width. Applicable only when `fixedLoc` is `top` or `bottom`. Default to -1, meaning no manual override is present.                                             |
 | `drawerHeight`             | `number`                                 | `-1`       | Manual override of the drawer's height. Applicable only when `fixedLoc` is `left` or `right`. Default to -1, meaning no manual override is present.                                            |
@@ -181,14 +185,86 @@ Some caveats and gotchas while using `react-native-sliding-drawer`
 
 ### 1. `<SlidingDrawer></SlidingDrawer>` must NOT have restricting parent
 
-`<SlidingDrawer></SlidingDrawer>` is sensitive to position. Its own position prop is set to "absolute", but if some of its parent components have restricting positioning or sizing, the rendered sliding drawer might have unexpected height, width, peek size, etc. It is thus highly recommended that `<SlidingDrawer></SlidingDrawer>` has as few parents as possible (i.e. it is coded as close to top level component as possible). This way, there is less risk of the sliding drawer being constraint by some other components. If, however, the sliding drawer must be deeply nested, make sure that each of its parent has loose positioning or sizing. 
+`<SlidingDrawer></SlidingDrawer>` is sensitive to position. Its own position prop is set to "absolute", but if some of its parent components have restricting positioning or sizing, the rendered sliding drawer might have unexpected height, width, peek size, etc. It is thus highly recommended that `<SlidingDrawer></SlidingDrawer>` has as few parents as possible (i.e. it is coded as close to top level component as possible). This way, there is less risk of the sliding drawer being constraint by some other components. If, however, the sliding drawer must be deeply nested, make sure that each of its parent has loose positioning or sizing.
+
+For instance, the minimal workable example is a valid way use `<SlidingDrawer></SlidingDrawer>`, because its parent spreads the entire screen. However, if we put a restricting style on the parent such as the one shown below
+
+```js
+const App = () => {
+  const peekSize = 90;
+  const openSize = 270;
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'yellow',
+        width: 100,
+      }}>
+      <Text>Minimal Example</Text>
+      <SlidingDrawer peekSize={peekSize} openSize={openSize} fixedLoc="bottom">
+        <View style={{flex: 1, backgroundColor: 'red'}}>
+          <View style={{height: peekSize, backgroundColor: 'pink'}}>
+            <Text>Peek Portion</Text>
+          </View>
+          <View>
+            <Text>Open Portion</Text>
+          </View>
+        </View>
+      </SlidingDrawer>
+    </View>
+  );
+};
+```
+
+The sliding drawer no longer behaves as expected
+
+![Sliding drawer under a restricting parent](./images/slidingDrawerUnderRestrictingParent.gif)
+
+Note that the only difference between the erroneous example above and the minimal workable example is the addition of style `width: 100` to the parent component.
+
+To resolve this issue, we can remove the restricting style. Yet, if the restricting style has to stay, another way to resolve the problem is to take `<SlidingDrawer></SlidingDrawer>` out of its restricting parent like this
+
+```js
+const App = () => {
+  const peekSize = 90;
+  const openSize = 270;
+  return (
+    <>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: 'yellow',
+          width: 100,
+        }}>
+        <Text>Minimal Example</Text>
+      </View>
+      <SlidingDrawer peekSize={peekSize} openSize={openSize} fixedLoc="bottom">
+        <View style={{flex: 1, backgroundColor: 'red'}}>
+          <View style={{height: peekSize, backgroundColor: 'pink'}}>
+            <Text>Peek Portion</Text>
+          </View>
+          <View>
+            <Text>Open Portion</Text>
+          </View>
+        </View>
+      </SlidingDrawer>
+    </>
+  );
+};
+```
+
+Now the sliding drawer behavior is normal
+
+![Sliding drawer taken out of a restricting parent](./images/slidingDrawerOutOfRestrictingParent.gif)
 
 At the end of the day, trial-and-error is our best friend to determine what parent is suitable for the sliding drawer.
 
-### 2. Prop change at runtime can lead to unexpected behavior
 
-
-### 3. `onDrawerOpen`, `onDrawerPeek`, and `onFadeBackgroundPress` CANNOT handle dynamic variable
+### 2. `onDrawerOpen`, `onDrawerPeek`, and `onFadeBackgroundPress` CANNOT handle dynamic variable
 
 
 ## Contributing

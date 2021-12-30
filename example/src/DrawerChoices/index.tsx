@@ -15,6 +15,8 @@ import {styles} from './styles';
 type PropsT = {
   selectedDrawer: string;
   onChoicePress: (drawer: string) => void;
+  hasPeekable?: boolean;
+  onPeekableToggleButtonPress?: () => void;
   enableNonSlideOpen?: boolean;
   isInitialPeek?: boolean;
   onNonSlideOpenButtonPress?: () => void;
@@ -24,6 +26,8 @@ export const DrawerChoices: React.FC<PropsT> = props => {
   const {
     selectedDrawer,
     onChoicePress,
+    hasPeekable = true,
+    onPeekableToggleButtonPress = () => {},
     enableNonSlideOpen = false,
     isInitialPeek = true,
     onNonSlideOpenButtonPress = () => {},
@@ -56,18 +60,33 @@ export const DrawerChoices: React.FC<PropsT> = props => {
       </View>
 
       {enableNonSlideOpen ? (
-        <TouchableOpacity
-          style={[
-            styles.button,
-            {borderColor: isInitialPeek ? 'green' : 'red'},
-          ]}
-          onPress={onNonSlideOpenButtonPress}>
-          <Text style={{color: isInitialPeek ? 'green' : 'red'}}>
-            {isInitialPeek ? 'Open' : 'Close'}
-          </Text>
-        </TouchableOpacity>
+        <>
+          <TouchableOpacity
+            style={[
+              styles.button,
+              {borderColor: isInitialPeek ? 'green' : 'red'},
+            ]}
+            onPress={onNonSlideOpenButtonPress}>
+            <Text style={{color: isInitialPeek ? 'green' : 'red'}}>
+              {isInitialPeek ? 'Open' : 'Close'}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              styles.button,
+              {borderColor: hasPeekable ? 'red' : 'green'},
+            ]}
+            onPress={onPeekableToggleButtonPress}>
+            <Text style={{color: hasPeekable ? 'red' : 'green'}}>
+              {hasPeekable ? 'Peekable OFF' : 'Peekable ON'}
+            </Text>
+          </TouchableOpacity>
+        </>
       ) : (
-        <View style={[styles.button, {borderWidth: 0}]} />
+        <>
+          <View style={[styles.button, {borderWidth: 0}]} />
+          <View style={[styles.button, {borderWidth: 0}]} />
+        </>
       )}
     </View>
   );

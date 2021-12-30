@@ -17,7 +17,8 @@ import {RightDrawer} from './Drawers/RightDrawer';
  * A function to help display the FadeBgNonSlideOpenNotTappable drawers
  * @param drawer Name of drawer to be displayed.
  * @param nonSlideOpen Determines whether the drawer shall be at the open or
- * peek state. true = slide at open state, false = slide at peek state
+ * peek state. true = slide at open state, false = slide at peek state.
+ * @param hasPeekable Whether to show the peekable section of the drawer.
  * @param onDrawerPeek Callback when the drawer is peek, same general purpose
  * as onDrawerOpen.
  * @returns A sliding drawer component
@@ -25,24 +26,41 @@ import {RightDrawer} from './Drawers/RightDrawer';
 export const display = (
   drawer: string,
   nonSlideOpen: boolean,
+  hasPeekable: boolean,
   onDrawerPeek: () => void,
 ) => {
   switch (drawer) {
     case 'top':
       return (
-        <TopDrawer onDrawerPeek={onDrawerPeek} nonSlideOpen={nonSlideOpen} />
+        <TopDrawer
+          onDrawerPeek={onDrawerPeek}
+          nonSlideOpen={nonSlideOpen}
+          hasPeekable={hasPeekable}
+        />
       );
     case 'bottom':
       return (
-        <BottomDrawer onDrawerPeek={onDrawerPeek} nonSlideOpen={nonSlideOpen} />
+        <BottomDrawer
+          onDrawerPeek={onDrawerPeek}
+          nonSlideOpen={nonSlideOpen}
+          hasPeekable={hasPeekable}
+        />
       );
     case 'left':
       return (
-        <LeftDrawer onDrawerPeek={onDrawerPeek} nonSlideOpen={nonSlideOpen} />
+        <LeftDrawer
+          onDrawerPeek={onDrawerPeek}
+          nonSlideOpen={nonSlideOpen}
+          hasPeekable={hasPeekable}
+        />
       );
     case 'right':
       return (
-        <RightDrawer onDrawerPeek={onDrawerPeek} nonSlideOpen={nonSlideOpen} />
+        <RightDrawer
+          onDrawerPeek={onDrawerPeek}
+          nonSlideOpen={nonSlideOpen}
+          hasPeekable={hasPeekable}
+        />
       );
     default:
       return null;

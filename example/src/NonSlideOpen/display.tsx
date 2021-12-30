@@ -22,6 +22,7 @@ import {RightDrawer} from './Drawers/RightDrawer';
  * This is especially important for nonSlideOpen drawers, as when the drawer
  * is open by pressing a button, the screen re-renders, and as a result we need
  * the drawer to be freshly rendered at the open state.
+ * @param hasPeekable Whether to show the peekable section of the drawer.
  * @param onDrawerOpen Callback when the drawer is open, usually used to modify
  * state value for the drawer.
  * @param onDrawerPeek Callback when the drawer is peek, same general purpose
@@ -32,6 +33,7 @@ export const display = (
   drawer: string,
   nonSlideOpen: boolean,
   isInitialPeek: boolean,
+  hasPeekable: boolean,
   onDrawerOpen: () => void,
   onDrawerPeek: () => void,
 ) => {
@@ -40,6 +42,7 @@ export const display = (
       return (
         <TopDrawer
           isInitialPeek={isInitialPeek}
+          hasPeekable={hasPeekable}
           onDrawerOpen={onDrawerOpen}
           onDrawerPeek={onDrawerPeek}
           nonSlideOpen={nonSlideOpen}
@@ -49,6 +52,7 @@ export const display = (
       return (
         <BottomDrawer
           isInitialPeek={isInitialPeek}
+          hasPeekable={hasPeekable}
           onDrawerOpen={onDrawerOpen}
           onDrawerPeek={onDrawerPeek}
           nonSlideOpen={nonSlideOpen}
@@ -58,6 +62,7 @@ export const display = (
       return (
         <LeftDrawer
           isInitialPeek={isInitialPeek}
+          hasPeekable={hasPeekable}
           onDrawerOpen={onDrawerOpen}
           onDrawerPeek={onDrawerPeek}
           nonSlideOpen={nonSlideOpen}
@@ -67,6 +72,7 @@ export const display = (
       return (
         <RightDrawer
           isInitialPeek={isInitialPeek}
+          hasPeekable={hasPeekable}
           onDrawerOpen={onDrawerOpen}
           onDrawerPeek={onDrawerPeek}
           nonSlideOpen={nonSlideOpen}

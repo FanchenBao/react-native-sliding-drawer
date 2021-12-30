@@ -15,6 +15,7 @@ import {DrawerChoices} from '../DrawerChoices';
 export const FadeBgNonSlideOpenNotTappable = () => {
   const [selectedDrawer, setSelectedDrawer] = React.useState('bottom');
   const [nonSlideOpen, setNonSlideOpen] = React.useState(false);
+  const [hasPeekable, setHasPeekable] = React.useState(false);
 
   return (
     <>
@@ -23,8 +24,12 @@ export const FadeBgNonSlideOpenNotTappable = () => {
         onChoicePress={setSelectedDrawer}
         enableNonSlideOpen={true}
         onNonSlideOpenButtonPress={() => setNonSlideOpen(!nonSlideOpen)}
+        hasPeekable={hasPeekable}
+        onPeekableToggleButtonPress={() => setHasPeekable(!hasPeekable)}
       />
-      {display(selectedDrawer, nonSlideOpen, () => setNonSlideOpen(false))}
+      {display(selectedDrawer, nonSlideOpen, hasPeekable, () =>
+        setNonSlideOpen(false),
+      )}
     </>
   );
 };

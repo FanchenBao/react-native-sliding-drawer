@@ -16,6 +16,7 @@ export const NonSlideOpen = () => {
   const [selectedDrawer, setSelectedDrawer] = React.useState('bottom');
   const [isInitialPeek, setIsInitialPeek] = React.useState(true);
   const [nonSlideOpen, setNonSlideOpen] = React.useState(false);
+  const [hasPeekable, setHasPeekable] = React.useState(false);
 
   return (
     <>
@@ -25,11 +26,14 @@ export const NonSlideOpen = () => {
         enableNonSlideOpen={true}
         isInitialPeek={isInitialPeek}
         onNonSlideOpenButtonPress={() => setNonSlideOpen(!nonSlideOpen)}
+        hasPeekable={hasPeekable}
+        onPeekableToggleButtonPress={() => setHasPeekable(!hasPeekable)}
       />
       {display(
         selectedDrawer,
         nonSlideOpen,
         isInitialPeek,
+        hasPeekable,
         () => {
           setIsInitialPeek(false);
           setNonSlideOpen(true);

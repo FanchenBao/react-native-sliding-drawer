@@ -21,7 +21,6 @@ import * as React from 'react';
 import {View, TouchableOpacity, Text} from 'react-native';
 import {NonSlideOpen} from './src/NonSlideOpen/index';
 import {Peekable} from './src/Peekable';
-import {PeekableNonSlideOpen} from './src/PeekableNonSlideOpen';
 import {FadeBgNonSlideOpenNotTappable} from './src/FadeBgNonSlideOpenNotTappable';
 import {FadeBgTappable} from './src/FadeBgTappable';
 import {FadeBgPeekableNotTappable} from './src/FadeBgPeekableNotTappable';
@@ -30,7 +29,6 @@ const App = () => {
   const demos = {
     Peekable: <Peekable />,
     NonSlideOpen: <NonSlideOpen />,
-    PeekableNonSlideOpen: <PeekableNonSlideOpen />,
     FadeBgPeekableNotTappable: <FadeBgPeekableNotTappable />,
     FadeBgNonSlideOpenNotTappable: <FadeBgNonSlideOpenNotTappable />,
     FadeBgTappable: <FadeBgTappable />,
@@ -83,15 +81,33 @@ export default App;
  * the code below.
  */
 // import * as React from 'react';
-// import {View, Text} from 'react-native';
-// import {SlidingDrawer} from 'react-native-sliding-drawer';
+// import {View, Text, TouchableOpacity} from 'react-native';
+// import {SlidingDrawer} from './src/react-native-sliding-drawer';
 
 // const App = () => {
-//   const peekSize = 90;
 //   const openSize = 270;
+//   const [peekSize, setPeekSize] = React.useState(90);
+//   console.log(peekSize);
 //   return (
-//     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+//     <View
+//       style={{
+//         flex: 1,
+//         justifyContent: 'center',
+//         alignItems: 'center',
+//         backgroundColor: 'yellow',
+//       }}>
 //       <Text>Minimal Example</Text>
+//       <TouchableOpacity
+//         style={{backgroundColor: 'blue', borderRadius: 15, padding: 10}}
+//         onPress={() => {
+//           if (peekSize === 10) {
+//             setPeekSize(90);
+//           } else {
+//             setPeekSize(10);
+//           }
+//         }}>
+//         <Text style={{fontSize: 30, color: 'white'}}>Toggle</Text>
+//       </TouchableOpacity>
 //       <SlidingDrawer peekSize={peekSize} openSize={openSize} fixedLoc="bottom">
 //         <View style={{flex: 1, backgroundColor: 'red'}}>
 //           <View style={{height: peekSize, backgroundColor: 'pink'}}>

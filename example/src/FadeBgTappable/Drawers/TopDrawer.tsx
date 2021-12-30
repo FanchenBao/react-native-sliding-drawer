@@ -16,6 +16,7 @@ type PropsT = {
   isInitialPeek: boolean;
   onDrawerOpen: () => void;
   onDrawerPeek: () => void;
+  hasPeekable: boolean;
   nonSlideOpen: boolean;
   onFadeBackgroundPress: () => void;
 };
@@ -25,14 +26,21 @@ type PropsT = {
  */
 export const TopDrawer: React.FC<PropsT> = props => {
   const {
-    onDrawerOpen,
-    onDrawerPeek,
     isInitialPeek,
     nonSlideOpen,
+    hasPeekable,
+    onDrawerOpen,
+    onDrawerPeek,
     onFadeBackgroundPress,
   } = props;
-  const peekSize = 95;
-  const openSize = 240;
+  /**
+   * NOTE: openSize is modified as well, because openSize is NOT the
+   * size of the open section, but the size of the entire drawer after it is
+   * open. Since peekSize increases and the entire drawer includes the peekSize,
+   * openSize needs to increase as well.
+   */
+  const peekSize = 0 + (hasPeekable ? 90 : 0);
+  const openSize = 240 + (hasPeekable ? 90 : 0);
 
   return (
     <SlidingDrawer

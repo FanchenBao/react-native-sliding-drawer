@@ -15,15 +15,22 @@ import {BottomDrawerContent} from '../../DrawerContent/index';
 type PropsT = {
   onDrawerPeek: () => void;
   nonSlideOpen: boolean;
+  hasPeekable: boolean;
 };
 
 /**
  * Example for a bottom drawer
  */
 export const BottomDrawer: React.FC<PropsT> = props => {
-  const {nonSlideOpen, onDrawerPeek} = props;
-  const peekSize = 0;
-  const openSize = 240;
+  const {onDrawerPeek, nonSlideOpen, hasPeekable} = props;
+  /**
+   * NOTE: openSize is modified as well, because openSize is NOT the
+   * size of the open section, but the size of the entire drawer after it is
+   * open. Since peekSize increases and the entire drawer includes the peekSize,
+   * openSize needs to increase as well.
+   */
+  const peekSize = 0 + (hasPeekable ? 90 : 0);
+  const openSize = 240 + (hasPeekable ? 90 : 0);
 
   return (
     <SlidingDrawer
