@@ -44,7 +44,8 @@
   },
   "homepage": "https://github.com/FanchenBao/react-native-sliding-drawer#readme",
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^11.0.0",
@@ -100,9 +101,6 @@
       "@release-it/conventional-changelog": {
         "preset": "angular"
       }
-    },
-    "publishConfig": {
-      "access": "public"
     }
   },
   "eslintConfig": {
