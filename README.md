@@ -58,7 +58,7 @@ export default App;
 
 ### 1. [Peekable](./example/src/Peekable)
 
-The sliding drawer has one section always visible (peekable section). Upon dragging on this section, the drawer opens up and reveals the other section (open section). Drag the opened drawer in the other direction closes the drawer to its peek position.
+The sliding drawer has one section always visible (peekable section). Upon sliding on this section, the drawer opens up and reveals the other section (open section). Slide the opened drawer in the other direction closes the drawer to its peek position.
 
 <table>
   <tr>
@@ -71,7 +71,7 @@ The sliding drawer has one section always visible (peekable section). Upon dragg
 
 ### 2. [NonSlideOpen](./example/src/NonSlideOpen)
 
-The drawer itself is invisible at rest. Upon pressing a button, the drawer opens up. To close the drawer, one can press the button again or drag the drawer in the opposite direction.
+Upon pressing a button, the drawer opens up. Press the button again, the drawer closes. It works with or without the peekable section.
 
 <table>
   <tr>
@@ -82,22 +82,11 @@ The drawer itself is invisible at rest. Upon pressing a button, the drawer opens
   </tr>
 </table>
 
-### 3.[PeekableNonSlideOpen](./example/src/PeekableNonSlideOpen)
 
-Combination of Peekable and NonSlideOpen. The drawer can be opened and closed by either pressing a button or dragging the exposed part of the drawer.
 
-<table>
-  <tr>
-    <td> <img src="./images/peekableNonSlideOpen/bottom.gif" alt="PeekableNonSlideIoen Bottom" /> </td>
-    <td> <img src="./images/peekableNonSlideOpen/top.gif" alt="PeekableNonSlideIoen Top" /> </td>
-    <td> <img src="./images/peekableNonSlideOpen/left.gif" alt="PeekableNonSlideIoen Left" /> </td>
-    <td> <img src="./images/peekableNonSlideOpen/right.gif" alt="PeekableNonSlideIoen Right" /> </td>
-  </tr>
-</table>
+### 3. [FadeBgPeekableNotTappable](./example/src/FadeBgPeekableNotTappable)
 
-### 4. [FadeBgPeekableNotTappable](./example/src/FadeBgPeekableNotTappable)
-
-Same layout as Peekable, except that as the drawer is dragged to open, the background gradually gets darker. However, the dark background is not tappable.
+Same layout as Peekable, except that as the drawer slides open, the background gradually gets darker. However, the dark background is not tappable.
 
 <table>
   <tr>
@@ -108,9 +97,9 @@ Same layout as Peekable, except that as the drawer is dragged to open, the backg
   </tr>
 </table>
 
-### 5. [FadeBgNonSlideOpenNotTappable](./example/src/FadeBgNonSlideOpenNotTappable)
+### 4. [FadeBgNonSlideOpenNotTappable](./example/src/FadeBgNonSlideOpenNotTappable)
 
-Same layout as NonSlideOpen, except that as the drawer opens up, the background gradually gets darker. However, the dark background is not tappable. Furthermore, since the dark background covers the button, the only way to close the drawer is to drag it the opposite direction.
+Same layout as NonSlideOpen, except that as the drawer opens up, the background gradually gets darker. However, the dark background is not tappable. Furthermore, since the dark background covers the button, the only way to close the drawer is to slide it close.
 
 <table>
   <tr>
@@ -122,11 +111,11 @@ Same layout as NonSlideOpen, except that as the drawer opens up, the background 
 </table>
 
 
-### 6. [FadeBgTappable](./example/src/FadeBgTappable)
+### 5. [FadeBgTappable](./example/src/FadeBgTappable)
 
-Same layout as PeekableNonSlideOpen, except that as the drawer opens up, the background gradually gets darker. Also, the dark background is tappable, and in this case, tapping the dark background closes the drawer to its peek position.
+Same layout as NonSlideOpen, except that as the drawer opens up, the background gradually gets darker. Also, the dark background is tappable. In this case, tapping the dark background closes the drawer to its peek position.
 
-**IMPORTANT:** `FadeBgTappable` is the most hacky example out of all comprehensive examples. To make it work, a specific trick needs to be applied (see the comments in the [index file](./example/src/FadeBgTappable/index.tsx)). If one can afford the background not being tappable, it is highly recommended that examples 4 and 5 be used for shading the background dark when the drawer opens up.
+**IMPORTANT:** `FadeBgTappable` is the most hacky example out of all comprehensive examples. To make it work, a specific trick is applied (see the comments in the [index file](./example/src/FadeBgTappable/index.tsx)). If one can afford that the background not be tappable, it is highly recommended that examples 3 and 4 are used.
 
 <table>
   <tr>
