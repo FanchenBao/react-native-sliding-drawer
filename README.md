@@ -5,7 +5,7 @@ A React Native component that creates a sliding drawer on any side of the screen
 ## Installation
 
 ```sh
-npm install react-native-sliding-drawer
+npm install @fanchenbao/react-native-sliding-drawer
 ```
 
 ## Usage
