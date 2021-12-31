@@ -22,6 +22,7 @@ type PropsT = {
   fixedLoc: 'top' | 'bottom' | 'left' | 'right'; // Where the drawer is fixed at. Top drawer means sliding downwards, bottom upwards, left rightwards, right leftwards.
   sensitivity: number; // how much finger dragging (in pixels) shall trigger the drawer to change state.
   isInitialPeek: boolean; // a flag indicating whether the initial state of the drawer is Peek. Default to True.
+  enableSlideOpen: boolean; // a flag indicating whether a drawer can be opened with sliding.
   enableNonSlideOpen: boolean; // a flag indicating whether a drawer can be opened without sliding.
   nonSlideOpen: boolean; // If true, open the drawer without sliding. Otherwise, peek the drawer without sliding.
   onDrawerOpen: () => void; // callback when the drawer is in open state.
@@ -30,7 +31,7 @@ type PropsT = {
   useNativeDriver: boolean; // whether to use native driver for animation. Default to false.
   enableFadeBackground: boolean; // A flag indicating whether a fade in background is visible upon drawer open
   maxFadeBackgroundOpacity: number; // The max opacity of the fade in background
-  onFadeBackgroundPress: () => void; // callback when the fade in background is pressed. NOTE: currently peek the drawer onFadeBackgroundPress is NOT supported, because the animation on fade is messed up when isInitialPeek changes.
+  onFadeBackgroundPress: () => void; // callback when the fade in background is pressed.
   style: ViewStyle; // custom styles of the sliding window.
 };
 
@@ -47,6 +48,7 @@ export const DynamicDrawer: React.FC<PropsT> = props => {
     maxPct,
     fixedLoc,
     sensitivity,
+    enableSlideOpen,
     enableNonSlideOpen,
     nonSlideOpen,
     onDrawerOpen,
@@ -339,12 +341,18 @@ export const DynamicDrawer: React.FC<PropsT> = props => {
           />
         </Animated.View>
       )}
-      <Animated.View
-        style={[{position: 'absolute'}, style, getTransform()]}
-        /* Refers to the PanResponder created above */
-        {...panResponder.panHandlers}>
-        {children}
-      </Animated.View>
+      {enableSlideOpen ? (
+        <Animated.View
+          style={[{position: 'absolute'}, style, getTransform()]}
+          /* Refers to the PanResponder created above */
+          {...panResponder.panHandlers}>
+          {children}
+        </Animated.View>
+      ) : (
+        <Animated.View style={[{position: 'absolute'}, style, getTransform()]}>
+          {children}
+        </Animated.View>
+      )}
     </>
   );
 };

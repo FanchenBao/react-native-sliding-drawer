@@ -16,9 +16,11 @@ npm install react-native-sliding-drawer
 </SlidingDrawer>
 ```
 
-A minimal workable example is shown below. It can also be found in `example/App.tsx`.
+A minimal workable example is shown below.
 
 ```js
+import * as React from 'react';
+import {View, Text} from 'react-native';
 import {SlidingDrawer} from 'react-native-sliding-drawer';
 
 const App = () => {
@@ -46,9 +48,11 @@ const App = () => {
     </View>
   );
 };
+
+export default App;
 ```
 
-![Minimal Example](./image/minimal_example.gif)
+![Minimal Example](./image/minimalExample.gif)
 
 ## Comprehensive Examples
 
@@ -169,6 +173,7 @@ Comment and uncomment appropriate source code in [`App.tsx`](./example/App.tsx) 
 | `sensitivity`              | `number`                                 | `10`       | The amount of pixels a drawer needs to slide to trigger state change (peek to open or open to peek). The smaller the value, the more sensitive the state change. Default to 10.                |
 | `expandable`               | `boolean`                                | `true`     | A flag indicating whether a drawer is static (non-expandable) or dynamic (expandable). Default to true, i.e. the drawer is dynamic.                                                            |
 | `isInitialPeek`            | `boolean`                                | `true`     | A flag indicating whether the initial state of the drawer is peek or open. Default to true, i.e. the initial state is peek.                                                                    |
+| `enableSlideOpen`       | `boolean`                                | `true`    | A flag indicating whether a drawer can be opened with sliding (e.g. open upon a button press). Default to true.                                                                            |
 | `enableNonSlideOpen`       | `boolean`                                | `false`    | A flag indicating whether a drawer can be opened without sliding (e.g. open upon a button press). Default to false.                                                                            |
 | `nonSlideOpen`             | `boolean`                                | `false`    | A flag indicating whether to open or close a drawer. Applicable only when `enableNonSlideOpen` is set to true. Default to false, i.e. to close the drawer.                                     |
 | `onDrawerOpen`             | `() => void`                             | `() => {}` | A callback function when the drawer reaches the open state. See the caveat section for the particularity of its usage. Default to a no-operation function.                                     |
@@ -190,6 +195,10 @@ Some caveats and gotchas while using `react-native-sliding-drawer`
 For instance, the minimal workable example is a valid way use `<SlidingDrawer></SlidingDrawer>`, because its parent spreads the entire screen. However, if we put a restricting style on the parent such as the one shown below
 
 ```js
+import * as React from 'react';
+import {View, Text} from 'react-native';
+import {SlidingDrawer} from 'react-native-sliding-drawer';
+
 const App = () => {
   const peekSize = 90;
   const openSize = 270;
@@ -216,6 +225,8 @@ const App = () => {
     </View>
   );
 };
+
+export default App;
 ```
 
 The sliding drawer no longer behaves as expected
@@ -264,7 +275,87 @@ Now the sliding drawer behavior is normal
 At the end of the day, trial-and-error is our best friend to determine what parent is suitable for the sliding drawer.
 
 
-### 2. `onDrawerOpen`, `onDrawerPeek`, and `onFadeBackgroundPress` CANNOT handle dynamic variable
+### 2. `onDrawerOpen` and `onDrawerPeek` CANNOT handle dynamic variable when the drawer is opened or closed by dragging
+
+A good example of this behavior is demonstrated below.
+
+```js
+import * as React from 'react';
+import {View, Text, TouchableOpacity} from 'react-native';
+import {SlidingDrawer} from 'react-native-sliding-drawer';
+
+const App = () => {
+  const peekSize = 90;
+  const openSize = 270;
+  const [count, setCount] = React.useState(0);
+  const [isInitialPeek, setIsInitialPeek] = React.useState(true);
+  const [nonSlideOpen, setNonSlideOpen] = React.useState(false);
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'yellow',
+      }}>
+      <Text style={{fontSize: 50}}>{count}</Text>
+      <TouchableOpacity
+        style={{
+          margin: 20,
+          padding: 5,
+          borderWidth: 2,
+          borderColor: isInitialPeek ? 'green' : 'red',
+          borderRadius: 10,
+        }}
+        onPress={() => setNonSlideOpen(!nonSlideOpen)}>
+        <Text style={{fontSize: 20, color: isInitialPeek ? 'green' : 'red'}}>
+          {isInitialPeek ? 'Open' : 'Close'}
+        </Text>
+      </TouchableOpacity>
+      <SlidingDrawer
+        peekSize={peekSize}
+        openSize={openSize}
+        fixedLoc="bottom"
+        isInitialPeek={isInitialPeek}
+        enableNonSlideOpen={true}
+        nonSlideOpen={nonSlideOpen}
+        onDrawerOpen={() => {
+          setIsInitialPeek(false);
+          setNonSlideOpen(true);
+          setCount(count + 1);
+        }}
+        onDrawerPeek={() => {
+          setIsInitialPeek(true);
+          setNonSlideOpen(false);
+          setCount(count + 1);
+        }}>
+        <View style={{flex: 1, backgroundColor: 'red'}}>
+          <View style={{height: peekSize, backgroundColor: 'pink'}}>
+            <Text>Peek Portion</Text>
+          </View>
+          <View>
+            <Text>Open Portion</Text>
+          </View>
+        </View>
+      </SlidingDrawer>
+    </View>
+  );
+};
+
+export default App;
+```
+
+![Dragging does not work with dynamic variable](./images/dragDynamicProblem.gif)
+
+The desired behavior is that each time the drawer opens or closes, the counter counts up. We can see that the desired behavior is achieved using the non-slide open feature. However, when the drawer slides open or close, the counter gets stuck at 1. This is `onDrawerOpen` and `onDrawerPeek` are cached in a ref (hence, the value in `count` is forever the initialized value, which is 0) when the drawer is opened or closed via sliding. Any further change to `count` does not alter its cached value inside the ref. On the other hand, the two callbacks are NOT cached when the drawer is opened or closed via the non-slide open feature. Hence, the value in `count` does change.
+
+There are two ways to work around this limtation.
+
+1. If the values in the callback can be hard coded, do it! For instance, instead of using `setIsInitialPeek(!isInitialPeek)` for both `onDrawerOpen` and `onDrawerPeek`, hard code the true and false value.
+2. If including dynamic variables is inevitable for the two callbacks, consider disabling the slide open feature. This can be achieved by setting the prop `enableSlideOpen` to false.
+
+Of course, if anyone has a solution to directly resolve this issue, please share your thoughts and open a pull request.
 
 
 ## Contributing
