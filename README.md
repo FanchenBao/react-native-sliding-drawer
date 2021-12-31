@@ -52,7 +52,8 @@ const App = () => {
 export default App;
 ```
 
-![Minimal Example](./docs/images/minimalExample.gif)
+<img src="./docs/images/ezgif.com-gif-maker.gif" alt="Minimal workable example" />
+
 
 ## Comprehensive Examples
 
