@@ -68,7 +68,13 @@ export default App;
 * [FadeBgTappable](./docs/demos/fadeBgTappable.md)
 
 
-## Run Examples
+## Run Comprehensive Examples
+
+Download this repo
+
+```sh
+git clone https://github.com/FanchenBao/react-native-sliding-drawer.git
+```
 
 Go to the `example` folder and sets up the example app
 
@@ -88,7 +94,7 @@ or Android
 yarn example android
 ```
 
-Comment and uncomment appropriate source code in [`App.tsx`](./example/App.tsx) to run either the minimal example or the comprehensive examples.
+The example app is running from [`./example/App.tsx`](./example/App.tsx)
 
 ## Props
 

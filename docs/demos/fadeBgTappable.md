@@ -4,7 +4,7 @@
 
 Same layout as NonSlideOpen, except that as the drawer opens up, the background gradually gets darker. Also, the dark background is tappable. In this case, tapping the dark background closes the drawer to its peek position.
 
-**IMPORTANT:** `FadeBgTappable` is the most hacky example out of all comprehensive examples. To make it work, a specific trick is applied (see the comments in the [index file](./example/src/FadeBgTappable/index.tsx)). If one can afford that the background not be tappable, it is highly recommended that examples 3 and 4 are used.
+**IMPORTANT:** `FadeBgTappable` is the most hacky example out of all comprehensive examples. To make it work, a specific trick is applied (see the comments in the [index file](../../example/src/FadeBgTappable/index.tsx)). If one can afford that the background not be tappable, it is highly recommended that examples 3 and 4 are used.
 
 <table>
   <tr>
