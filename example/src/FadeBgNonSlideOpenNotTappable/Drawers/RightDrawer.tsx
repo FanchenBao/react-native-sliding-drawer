@@ -41,7 +41,7 @@ export const RightDrawer: React.FC<PropsT> = props => {
       enableNonSlideOpen={true}
       nonSlideOpen={nonSlideOpen}
       maxPct={0.7}
-      enableFadeBackground={nonSlideOpen}>
+      enableFadeBackground={true}>
       <RightDrawerContent peekSize={peekSize} />
     </SlidingDrawer>
   );

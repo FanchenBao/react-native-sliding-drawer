@@ -41,7 +41,7 @@ export const LeftDrawer: React.FC<PropsT> = props => {
       enableNonSlideOpen={true}
       nonSlideOpen={nonSlideOpen}
       maxPct={0.7}
-      enableFadeBackground={nonSlideOpen}>
+      enableFadeBackground={true}>
       <LeftDrawerContent peekSize={peekSize} />
     </SlidingDrawer>
   );

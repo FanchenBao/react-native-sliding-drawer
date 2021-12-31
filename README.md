@@ -220,7 +220,7 @@ export default App;
 
 The sliding drawer no longer behaves as expected
 
-![Sliding drawer under a restricting parent](./images/slidingDrawerUnderRestrictingParent.gif)
+![Sliding drawer under a restricting parent](./images/restrictingParent/problem.gif)
 
 Note that the only difference between the erroneous example above and the minimal workable example is the addition of style `width: 100` to the parent component.
 
@@ -259,12 +259,12 @@ const App = () => {
 
 Now the sliding drawer behavior is normal
 
-![Sliding drawer taken out of a restricting parent](./images/slidingDrawerOutOfRestrictingParent.gif)
+![Sliding drawer taken out of a restricting parent](./images/restrictingParent/solution.gif)
 
 At the end of the day, trial-and-error is our best friend to determine what parent is suitable for the sliding drawer.
 
 
-### 2. `onDrawerOpen` and `onDrawerPeek` CANNOT handle dynamic variable when the drawer is opened or closed by dragging
+### 2. `onDrawerOpen` and `onDrawerPeek` CANNOT handle dynamic variable when the drawer is opened or closed by sliding
 
 A good example of this behavior is demonstrated below.
 
@@ -335,7 +335,7 @@ const App = () => {
 export default App;
 ```
 
-![Dragging does not work with dynamic variable](./images/dragDynamicProblem.gif)
+![Sliding does not work with dynamic variable](./images/dynamicCallbackInSliding/problem.gif)
 
 The desired behavior is that each time the drawer opens or closes, the counter counts up. We can see that the desired behavior is achieved using the non-slide open feature. However, when the drawer slides open or close, the counter gets stuck at 1. This is `onDrawerOpen` and `onDrawerPeek` are cached in a ref (hence, the value in `count` is forever the initialized value, which is 0) when the drawer is opened or closed via sliding. Any further change to `count` does not alter its cached value inside the ref. On the other hand, the two callbacks are NOT cached when the drawer is opened or closed via the non-slide open feature. Hence, the value in `count` does change.
 

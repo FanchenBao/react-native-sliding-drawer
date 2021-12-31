@@ -21,6 +21,7 @@ type PropsT = {
   sensitivity?: number; // how much finger dragging (in pixels) shall trigger the drawer to change state.
   expandable?: boolean; // whether the drawer is expandable. If set to false, the drawer cannot expand beyond the peek state
   isInitialPeek?: boolean; // a flag indicating whether the initial state of the drawer is Peek. Default to True.
+  enableSlideOpen?: boolean; // a flag indicating whether a drawer can be opened with sliding.
   enableNonSlideOpen?: boolean; // a flag indicating whether a drawer can be opened without sliding.
   nonSlideOpen?: boolean; // If true, open the drawer without sliding. Otherwise, peek the drawer without sliding.
   onDrawerOpen?: () => void; // callback when the drawer is in open state. This callback CANNOT be state changes, because re-rendering when the drawer is not in the peek state would break its behavior.
@@ -29,7 +30,7 @@ type PropsT = {
   useNativeDriver?: boolean; // whether to use native driver for animation. Default to false.
   enableFadeBackground?: boolean; // A flag indicating whether a fade in background is visible upon drawer open
   maxFadeBackgroundOpacity?: number; // The max opacity of the fade in background
-  onFadeBackgroundPress?: () => void; // callback when the fade in background is pressed. NOTE: currently peek the drawer onFadeBackgroundPress is NOT supported, because the animation on fade is messed up when isInitialPeek changes.
+  onFadeBackgroundPress?: () => void; // callback when the fade in background is pressed.
 };
 
 /**
@@ -47,6 +48,7 @@ export const SlidingDrawer: React.FC<PropsT> = props => {
     sensitivity = 10,
     expandable = true,
     isInitialPeek = true,
+    enableSlideOpen = true,
     enableNonSlideOpen = false,
     nonSlideOpen = false,
     onDrawerOpen = () => {
@@ -124,6 +126,7 @@ export const SlidingDrawer: React.FC<PropsT> = props => {
       fixedLoc={fixedLoc}
       sensitivity={sensitivity}
       isInitialPeek={isInitialPeek}
+      enableSlideOpen={enableSlideOpen}
       enableNonSlideOpen={enableNonSlideOpen}
       nonSlideOpen={nonSlideOpen}
       onDrawerOpen={onDrawerOpen}

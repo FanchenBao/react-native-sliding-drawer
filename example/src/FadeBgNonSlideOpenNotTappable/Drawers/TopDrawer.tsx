@@ -40,7 +40,7 @@ export const TopDrawer: React.FC<PropsT> = props => {
       onDrawerPeek={onDrawerPeek}
       enableNonSlideOpen={true}
       nonSlideOpen={nonSlideOpen}
-      enableFadeBackground={nonSlideOpen}>
+      enableFadeBackground={true}>
       <TopDrawerContent peekSize={peekSize} />
     </SlidingDrawer>
   );
