@@ -52,79 +52,19 @@ const App = () => {
 export default App;
 ```
 
-![Minimal Example](./image/minimalExample.gif)
+![Minimal Example](./docs/images/minimalExample.gif)
 
 ## Comprehensive Examples
 
-### 1. [Peekable](./example/src/Peekable)
+* [Peekable](./docs/demos/peekable.md)
 
-The sliding drawer has one section always visible (peekable section). Upon sliding on this section, the drawer opens up and reveals the other section (open section). Slide the opened drawer in the other direction closes the drawer to its peek position.
+* [NonSlideOpen](./docs/demos/nonSlideOpen.md)
 
-<table>
-  <tr>
-    <td> <img src="./images/peekable/bottom.gif" alt="Peekable Bottom" /> </td>
-    <td> <img src="./images/peekable/top.gif" alt="Peekable Top" /> </td>
-    <td> <img src="./images/peekable/left.gif" alt="Peekable Left" /> </td>
-    <td> <img src="./images/peekable/right.gif" alt="Peekable Right" /> </td>
-  </tr>
-</table>
+* [FadePeekableNotTappable](./docs/demos/fadeBgPeekableNotTappable.md)
 
-### 2. [NonSlideOpen](./example/src/NonSlideOpen)
+* [FadeBgNonSlideOpenNotTappable](./docs/demos/fadeBgNonSlideOpenNotTappable.md)
 
-Upon pressing a button, the drawer opens up. Press the button again, the drawer closes. It works with or without the peekable section.
-
-<table>
-  <tr>
-    <td> <img src="./images/nonSlideOpen/bottom.gif" alt="NonSlideIoen Bottom" /> </td>
-    <td> <img src="./images/nonSlideOpen/top.gif" alt="NonSlideIoen Top" /> </td>
-    <td> <img src="./images/nonSlideOpen/left.gif" alt="NonSlideIoen Left" /> </td>
-    <td> <img src="./images/nonSlideOpen/right.gif" alt="NonSlideIoen Right" /> </td>
-  </tr>
-</table>
-
-
-
-### 3. [FadeBgPeekableNotTappable](./example/src/FadeBgPeekableNotTappable)
-
-Same layout as Peekable, except that as the drawer slides open, the background gradually gets darker. However, the dark background is not tappable.
-
-<table>
-  <tr>
-    <td> <img src="./images/fadeBgPeekableNotTappable/bottom.gif" alt="FadeBgPeekableNotTappable Bottom" /> </td>
-    <td> <img src="./images/fadeBgPeekableNotTappable/top.gif" alt="FadeBgPeekableNotTappable Top" /> </td>
-    <td> <img src="./images/fadeBgPeekableNotTappable/left.gif" alt="FadeBgPeekableNotTappable Left" /> </td>
-    <td> <img src="./images/fadeBgPeekableNotTappable/right.gif" alt="FadeBgPeekableNotTappable Right" /> </td>
-  </tr>
-</table>
-
-### 4. [FadeBgNonSlideOpenNotTappable](./example/src/FadeBgNonSlideOpenNotTappable)
-
-Same layout as NonSlideOpen, except that as the drawer opens up, the background gradually gets darker. However, the dark background is not tappable. Furthermore, since the dark background covers the button, the only way to close the drawer is to slide it close.
-
-<table>
-  <tr>
-    <td> <img src="./images/fadeBgNonSlideOpenNotTappable/bottom.gif" alt="FadeBgNonSlideOpenNotTappable Bottom" /> </td>
-    <td> <img src="./images/fadeBgNonSlideOpenNotTappable/top.gif" alt="FadeBgNonSlideOpenNotTappable Top" /> </td>
-    <td> <img src="./images/fadeBgNonSlideOpenNotTappable/left.gif" alt="FadeBgNonSlideOpenNotTappable Left" /> </td>
-    <td> <img src="./images/fadeBgNonSlideOpenNotTappable/right.gif" alt="FadeBgNonSlideOpenNotTappable Right" /> </td>
-  </tr>
-</table>
-
-
-### 5. [FadeBgTappable](./example/src/FadeBgTappable)
-
-Same layout as NonSlideOpen, except that as the drawer opens up, the background gradually gets darker. Also, the dark background is tappable. In this case, tapping the dark background closes the drawer to its peek position.
-
-**IMPORTANT:** `FadeBgTappable` is the most hacky example out of all comprehensive examples. To make it work, a specific trick is applied (see the comments in the [index file](./example/src/FadeBgTappable/index.tsx)). If one can afford that the background not be tappable, it is highly recommended that examples 3 and 4 are used.
-
-<table>
-  <tr>
-    <td> <img src="./images/fadeBgTappable/bottom.gif" alt="FadeBgTappable Bottom" /> </td>
-    <td> <img src="./images/fadeBgTappable/top.gif" alt="FadeBgTappable Top" /> </td>
-    <td> <img src="./images/fadeBgTappable/left.gif" alt="FadeBgTappable Left" /> </td>
-    <td> <img src="./images/fadeBgTappable/right.gif" alt="FadeBgTappable Right" /> </td>
-  </tr>
-</table>
+* [FadeBgTappable](./docs/demos/fadeBgTappable.md)
 
 
 ## Run Examples
@@ -220,7 +160,7 @@ export default App;
 
 The sliding drawer no longer behaves as expected
 
-![Sliding drawer under a restricting parent](./images/restrictingParent/problem.gif)
+![Sliding drawer under a restricting parent](./docs/images/caveats/restrictingParent/problem.gif)
 
 Note that the only difference between the erroneous example above and the minimal workable example is the addition of style `width: 100` to the parent component.
 
@@ -259,7 +199,7 @@ const App = () => {
 
 Now the sliding drawer behavior is normal
 
-![Sliding drawer taken out of a restricting parent](./images/restrictingParent/solution.gif)
+![Sliding drawer taken out of a restricting parent](./docs/images/caveats/restrictingParent/solution.gif)
 
 At the end of the day, trial-and-error is our best friend to determine what parent is suitable for the sliding drawer.
 
@@ -335,7 +275,7 @@ const App = () => {
 export default App;
 ```
 
-![Sliding does not work with dynamic variable](./images/dynamicCallbackInSliding/problem.gif)
+![Sliding does not work with dynamic variable](./docs/images/caveats/dynamicCallbackInSliding/problem.gif)
 
 The desired behavior is that each time the drawer opens or closes, the counter counts up. We can see that the desired behavior is achieved using the non-slide open feature. However, when the drawer slides open or close, the counter gets stuck at 1. This is `onDrawerOpen` and `onDrawerPeek` are cached in a ref (hence, the value in `count` is forever the initialized value, which is 0) when the drawer is opened or closed via sliding. Any further change to `count` does not alter its cached value inside the ref. On the other hand, the two callbacks are NOT cached when the drawer is opened or closed via the non-slide open feature. Hence, the value in `count` does change.
 
