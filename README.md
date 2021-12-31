@@ -21,7 +21,7 @@ A minimal workable example is shown below.
 ```js
 import * as React from 'react';
 import {View, Text} from 'react-native';
-import {SlidingDrawer} from 'react-native-sliding-drawer';
+import {SlidingDrawer}  from '@fanchenbao/react-native-sliding-drawer';
 
 const App = () => {
   const peekSize = 90;
@@ -127,7 +127,7 @@ For instance, the minimal workable example is a valid way use `<SlidingDrawer></
 ```js
 import * as React from 'react';
 import {View, Text} from 'react-native';
-import {SlidingDrawer} from 'react-native-sliding-drawer';
+import {SlidingDrawer}  from '@fanchenbao/react-native-sliding-drawer';
 
 const App = () => {
   const peekSize = 90;
@@ -212,7 +212,7 @@ A good example of this behavior is demonstrated below.
 ```js
 import * as React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
-import {SlidingDrawer} from 'react-native-sliding-drawer';
+import {SlidingDrawer}  from '@fanchenbao/react-native-sliding-drawer';
 
 const App = () => {
   const peekSize = 90;

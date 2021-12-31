@@ -41,7 +41,7 @@ npm install ../react-native-sliding-drawer-x.x.x.tgz
 Then in the example app, we can use sliding drawer by importing it directly from `node_modules`:
 
 ```javascript
-import {SlidingDrawer} from 'react-native-sliding-drawer'
+import {SlidingDrawer}  from '@fanchenbao/react-native-sliding-drawer'
 ```
 
 
