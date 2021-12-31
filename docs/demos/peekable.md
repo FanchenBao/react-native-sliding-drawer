@@ -6,11 +6,11 @@ The sliding drawer has one section always visible (peekable section). Upon slidi
 
 <table>
   <tr>
-    <td> <img src="../images/peekable/bottom.gif" alt="Peekable Bottom" /> </td>
-    <td> <img src="../images/peekable/top.gif" alt="Peekable Top" /> </td>
+    <td> <img src="../images/peekable/bottom_small.gif" alt="Peekable Bottom" /> </td>
+    <td> <img src="../images/peekable/top_small.gif" alt="Peekable Top" /> </td>
   </tr>
   <tr>
-    <td> <img src="../images/peekable/left.gif" alt="Peekable Left" /> </td>
-    <td> <img src="../images/peekable/right.gif" alt="Peekable Right" /> </td>
+    <td> <img src="../images/peekable/left_small.gif" alt="Peekable Left" /> </td>
+    <td> <img src="../images/peekable/right_small.gif" alt="Peekable Right" /> </td>
   </tr>
 </table>
