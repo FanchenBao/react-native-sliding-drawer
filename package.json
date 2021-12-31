@@ -1,6 +1,6 @@
 {
   "name": "@fanchenbao/react-native-sliding-drawer",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A React Native component that creates a sliding drawer on any side of the screen",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
