@@ -52,7 +52,7 @@ const App = () => {
 export default App;
 ```
 
-<img src="./docs/images/minimalExample_small.gif" alt="Minimal workable example" />
+<img src="./docs/images/minimalExample.gif" alt="Minimal workable example" />
 
 
 ## Comprehensive Examples
@@ -161,7 +161,7 @@ export default App;
 
 The sliding drawer no longer behaves as expected
 
-![Sliding drawer under a restricting parent](./docs/images/caveats/restrictingParent/problem_small.gif)
+![Sliding drawer under a restricting parent](./docs/images/caveats/restrictingParent/problem.gif)
 
 Note that the only difference between the erroneous example above and the minimal workable example is the addition of style `width: 100` to the parent component.
 
@@ -200,7 +200,7 @@ const App = () => {
 
 Now the sliding drawer behavior is normal
 
-![Sliding drawer taken out of a restricting parent](./docs/images/caveats/restrictingParent/solution_small.gif)
+![Sliding drawer taken out of a restricting parent](./docs/images/caveats/restrictingParent/solution.gif)
 
 At the end of the day, trial-and-error is our best friend to determine what parent is suitable for the sliding drawer.
 
@@ -276,7 +276,7 @@ const App = () => {
 export default App;
 ```
 
-![Sliding does not work with dynamic variable](./docs/images/caveats/dynamicCallbackInSliding/problem_small.gif)
+![Sliding does not work with dynamic variable](./docs/images/caveats/dynamicCallbackInSliding/problem.gif)
 
 The desired behavior is that each time the drawer opens or closes, the counter counts up. We can see that the desired behavior is achieved using the non-slide open feature. However, when the drawer slides open or close, the counter gets stuck at 1. This is `onDrawerOpen` and `onDrawerPeek` are cached in a ref (hence, the value in `count` is forever the initialized value, which is 0) when the drawer is opened or closed via sliding. Any further change to `count` does not alter its cached value inside the ref. On the other hand, the two callbacks are NOT cached when the drawer is opened or closed via the non-slide open feature. Hence, the value in `count` does change.
 

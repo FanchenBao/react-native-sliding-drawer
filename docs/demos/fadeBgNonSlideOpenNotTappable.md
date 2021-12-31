@@ -8,8 +8,6 @@ Same layout as NonSlideOpen, except that as the drawer opens up, the background 
   <tr>
     <td> <img src="../images/fadeBgNonSlideOpenNotTappable/bottom.gif" alt="FadeBgNonSlideOpenNotTappable Bottom" /> </td>
     <td> <img src="../images/fadeBgNonSlideOpenNotTappable/top.gif" alt="FadeBgNonSlideOpenNotTappable Top" /> </td>
-  </tr>
-  <tr>
     <td> <img src="../images/fadeBgNonSlideOpenNotTappable/left.gif" alt="FadeBgNonSlideOpenNotTappable Left" /> </td>
     <td> <img src="../images/fadeBgNonSlideOpenNotTappable/right.gif" alt="FadeBgNonSlideOpenNotTappable Right" /> </td>
   </tr>
