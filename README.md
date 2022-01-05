@@ -61,7 +61,7 @@ export default App;
 
 * [NonSlideOpen](./docs/demos/nonSlideOpen.md)
 
-* [FadePeekableNotTappable](./docs/demos/fadeBgPeekableNotTappable.md)
+* [FadeBgPeekableNotTappable](./docs/demos/fadeBgPeekableNotTappable.md)
 
 * [FadeBgNonSlideOpenNotTappable](./docs/demos/fadeBgNonSlideOpenNotTappable.md)
 
