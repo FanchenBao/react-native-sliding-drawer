@@ -119,6 +119,7 @@ The example app is running from [`./example/App.tsx`](./example/App.tsx)
 | `enableFadeBackground`     | `boolean`                                | `false`    | A flag indicating whether a fade in background is visible upon drawer movement. Specifically, as the drawer opens, the background darkens; as the drawer closes, the background brightens.     |
 | `maxFadeBackgroundOpacity` | `number`                                 | `0.5`      | Max opacity the background reaches when the drawer is in the open state. Applicable only when `enableFadeBackground` is set to true. Default to 0.5.                                           |
 | `onFadeBackgroundPress`    | `() => void`                             | `() => {}` | A callback function when the fade background is pressed after the drawer is in the open state. Applicable only when `enableFadeBackground` is set to true. Default to a no-operation function. |
+| `elevation`    | `number`                             | `200` | Android only. It defines z-order of the drawer. The higher the value, the more on-top the drawer is. Default to 200, which is a very big elevation and should guarantee the drawer is on top of everything else. |
 
 ## Caveats
 
