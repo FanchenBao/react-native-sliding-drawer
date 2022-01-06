@@ -81,15 +81,11 @@ export const SlidingDrawer: React.FC<PropsT> = props => {
     [openSize, peekSize],
   );
 
-  const {height, width} = useWindowDimensions();
+  const windowDim = useWindowDimensions();
+  const height = screenHeight < 0 ? windowDim.height : screenHeight;
+  const width = screenWidth < 0 ? windowDim.width : screenWidth;
   const isVertical = ['top', 'bottom'].includes(fixedLoc);
-  const size = isVertical
-    ? screenHeight < 0
-      ? height
-      : screenHeight
-    : screenWidth < 0
-    ? width
-    : screenWidth;
+  const size = isVertical ? height : width;
 
   if (maxPct * size < openSize || openSize < peekSize) {
     throw new Error(
@@ -136,6 +132,8 @@ export const SlidingDrawer: React.FC<PropsT> = props => {
     <DynamicDrawer
       isVertical={isVertical}
       size={size}
+      height={height}
+      width={width}
       DrawerState={DrawerState}
       maxPct={maxPct}
       fixedLoc={fixedLoc}

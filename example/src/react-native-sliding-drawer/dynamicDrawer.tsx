@@ -11,12 +11,13 @@ import {
   PanResponder,
   TouchableOpacity,
   ViewStyle,
-  useWindowDimensions,
 } from 'react-native';
 
 type PropsT = {
   isVertical: boolean; // whether the drawer opens in the vertical direction
   size: number; // size of the screen in the same direction as how the drawer opens.
+  height: number; // screen height, reconciled with possible user override
+  width: number; // screen width, reconciled with possible user override
   DrawerState: {Open: number; Peek: number};
   maxPct: number; // maximum pct of width or height allowed for a user to drag the drawer.
   fixedLoc: 'top' | 'bottom' | 'left' | 'right'; // Where the drawer is fixed at. Top drawer means sliding downwards, bottom upwards, left rightwards, right leftwards.
@@ -45,6 +46,8 @@ export const DynamicDrawer: React.FC<PropsT> = props => {
     children,
     isVertical,
     size,
+    height,
+    width,
     DrawerState,
     maxPct,
     fixedLoc,
@@ -71,7 +74,6 @@ export const DynamicDrawer: React.FC<PropsT> = props => {
   ).current;
   const isInitialPeekRef = React.useRef(isInitialPeek);
   const [fadeBackgroundOn, setFadeBackgroundOn] = React.useState(false);
-  const {height, width} = useWindowDimensions();
 
   // Compute the next state based on the current state and the displacement.
   // Note that dxy represents a displacement either vertically or horizontally,
