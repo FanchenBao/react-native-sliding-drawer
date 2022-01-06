@@ -17,6 +17,8 @@ type PropsT = {
   fixedLoc: 'top' | 'bottom' | 'left' | 'right'; // Where the drawer is fixed at. Top drawer means sliding downwards, bottom upwards, left rightwards, right leftwards.
   drawerWidth?: number; // manual override of drawer width, applicable when fixedLoc === 'top' | 'bottom'
   drawerHeight?: number; // manual override of drawer height, applicable when fixedLoc === 'right' | 'left'
+  screenWidth?: number; // width of the screen. Default to -1, i.e. using the value in react native's useWindowDimensions
+  screenHeight?: number; // height of the screen. Default to -1, i.e. using the value in react native's useWindowDimensions
   maxPct?: number; // maximum pct of width or height allowed for a user to drag the drawer.
   sensitivity?: number; // how much finger dragging (in pixels) shall trigger the drawer to change state.
   expandable?: boolean; // whether the drawer is expandable. If set to false, the drawer cannot expand beyond the peek state
@@ -45,6 +47,8 @@ export const SlidingDrawer: React.FC<PropsT> = props => {
     fixedLoc,
     drawerWidth = -1,
     drawerHeight = -1,
+    screenWidth = -1,
+    screenHeight = -1,
     maxPct = 0.5,
     sensitivity = 10,
     expandable = true,
@@ -79,7 +83,13 @@ export const SlidingDrawer: React.FC<PropsT> = props => {
 
   const {height, width} = useWindowDimensions();
   const isVertical = ['top', 'bottom'].includes(fixedLoc);
-  const size = isVertical ? height : width;
+  const size = isVertical
+    ? screenHeight < 0
+      ? height
+      : screenHeight
+    : screenWidth < 0
+    ? width
+    : screenWidth;
 
   if (maxPct * size < openSize || openSize < peekSize) {
     throw new Error(
@@ -93,15 +103,14 @@ export const SlidingDrawer: React.FC<PropsT> = props => {
         return {
           height: size,
           width: drawerWidth < 0 ? width : drawerWidth,
-          bottom:
-            height - (isInitialPeek ? DrawerState.Peek : DrawerState.Open),
+          bottom: size - (isInitialPeek ? DrawerState.Peek : DrawerState.Open),
           elevation: elevation,
         };
       case 'bottom':
         return {
           height: size,
           width: drawerWidth < 0 ? width : drawerWidth,
-          top: height - (isInitialPeek ? DrawerState.Peek : DrawerState.Open),
+          top: size - (isInitialPeek ? DrawerState.Peek : DrawerState.Open),
           elevation: elevation,
         };
       case 'left':
