@@ -32,6 +32,7 @@ type PropsT = {
   enableFadeBackground: boolean; // A flag indicating whether a fade in background is visible upon drawer open
   maxFadeBackgroundOpacity: number; // The max opacity of the fade in background
   onFadeBackgroundPress: () => void; // callback when the fade in background is pressed.
+  elevation: number; // Android only. Defines z-order for overlapping views. The higher the value, the more on-top a component is.
   style: ViewStyle; // custom styles of the sliding window.
 };
 
@@ -48,6 +49,7 @@ export const DynamicDrawer: React.FC<PropsT> = props => {
     maxPct,
     fixedLoc,
     sensitivity,
+    isInitialPeek,
     enableSlideOpen,
     enableNonSlideOpen,
     nonSlideOpen,
@@ -58,8 +60,8 @@ export const DynamicDrawer: React.FC<PropsT> = props => {
     enableFadeBackground,
     maxFadeBackgroundOpacity,
     onFadeBackgroundPress,
+    elevation,
     style,
-    isInitialPeek,
   } = props;
 
   // could be x or y direction displacement, depending on the value of fixedLoc
@@ -334,6 +336,7 @@ export const DynamicDrawer: React.FC<PropsT> = props => {
             position: 'absolute',
             height: height,
             width: width,
+            elevation: elevation,
           }}>
           <TouchableOpacity
             onPress={() => onFadeBackgroundPress()}
