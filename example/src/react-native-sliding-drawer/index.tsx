@@ -31,6 +31,7 @@ type PropsT = {
   enableFadeBackground?: boolean; // A flag indicating whether a fade in background is visible upon drawer open
   maxFadeBackgroundOpacity?: number; // The max opacity of the fade in background
   onFadeBackgroundPress?: () => void; // callback when the fade in background is pressed.
+  elevation?: number; // Android only. Defines z-order for overlapping views. The higher the value, the more on-top a component is.
 };
 
 /**
@@ -64,6 +65,7 @@ export const SlidingDrawer: React.FC<PropsT> = props => {
     onFadeBackgroundPress = () => {
       // Default no-op function
     },
+    elevation = 200, // A very big elevation, should guarantee the drawer is on top of everything else
   } = props;
 
   // State is the height of the drawer
@@ -93,24 +95,28 @@ export const SlidingDrawer: React.FC<PropsT> = props => {
           width: drawerWidth < 0 ? width : drawerWidth,
           bottom:
             height - (isInitialPeek ? DrawerState.Peek : DrawerState.Open),
+          elevation: elevation,
         };
       case 'bottom':
         return {
           height: size,
           width: drawerWidth < 0 ? width : drawerWidth,
           top: height - (isInitialPeek ? DrawerState.Peek : DrawerState.Open),
+          elevation: elevation,
         };
       case 'left':
         return {
           width: size,
           height: drawerHeight < 0 ? height : drawerHeight,
           right: size - (isInitialPeek ? DrawerState.Peek : DrawerState.Open),
+          elevation: elevation,
         };
       case 'right':
         return {
           width: size,
           height: drawerHeight < 0 ? height : drawerHeight,
           left: size - (isInitialPeek ? DrawerState.Peek : DrawerState.Open),
+          elevation: elevation,
         };
       default:
         return {};
@@ -136,6 +142,7 @@ export const SlidingDrawer: React.FC<PropsT> = props => {
       enableFadeBackground={enableFadeBackground}
       maxFadeBackgroundOpacity={maxFadeBackgroundOpacity}
       onFadeBackgroundPress={onFadeBackgroundPress}
+      elevation={elevation}
       style={getStyles()}>
       {children}
     </DynamicDrawer>
