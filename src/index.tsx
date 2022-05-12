@@ -6,7 +6,7 @@
  */
 
 import * as React from 'react';
-import {useWindowDimensions} from 'react-native';
+import {useWindowDimensions, Dimensions, StatusBar} from 'react-native';
 import {DynamicDrawer} from './dynamicDrawer';
 import {StaticDrawer} from './staticDrawer';
 
@@ -86,6 +86,15 @@ export const SlidingDrawer: React.FC<PropsT> = props => {
   const width = screenWidth < 0 ? windowDim.width : screenWidth;
   const isVertical = ['top', 'bottom'].includes(fixedLoc);
   const size = isVertical ? height : width;
+  // NOTE: bottomBarCorrection are needed specifically to handle
+  // Android devices, where the bottomBarCorrection must be deducted when computing
+  // the positioning of the drawer using `top` or `bottom` prop. iOS does not
+  // seem to suffer from this problem. Hence for iOS, bottomBarCorrection is 0
+  // (because in iOS StatusBar.currentHeight returns null)
+  const bottomBarCorrection =
+    Dimensions.get('screen').height -
+    height -
+    (StatusBar.currentHeight ? StatusBar.currentHeight : 0);
 
   if (maxPct * size < openSize || openSize < peekSize) {
     throw new Error(
@@ -99,14 +108,20 @@ export const SlidingDrawer: React.FC<PropsT> = props => {
         return {
           height: size,
           width: drawerWidth < 0 ? width : drawerWidth,
-          bottom: size - (isInitialPeek ? DrawerState.Peek : DrawerState.Open),
+          bottom:
+            size -
+            bottomBarCorrection -
+            (isInitialPeek ? DrawerState.Peek : DrawerState.Open),
           elevation: elevation,
         };
       case 'bottom':
         return {
           height: size,
           width: drawerWidth < 0 ? width : drawerWidth,
-          top: size - (isInitialPeek ? DrawerState.Peek : DrawerState.Open),
+          top:
+            size -
+            bottomBarCorrection -
+            (isInitialPeek ? DrawerState.Peek : DrawerState.Open),
           elevation: elevation,
         };
       case 'left':
