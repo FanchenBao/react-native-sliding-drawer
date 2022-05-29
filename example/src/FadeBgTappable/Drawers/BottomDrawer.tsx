@@ -11,6 +11,7 @@
 import * as React from 'react';
 import {SlidingDrawer} from '../../react-native-sliding-drawer';
 import {BottomDrawerContent} from '../../DrawerContent/index';
+import {getBrand} from 'react-native-device-info';
 
 type PropsT = {
   isInitialPeek: boolean;
@@ -47,6 +48,7 @@ export const BottomDrawer: React.FC<PropsT> = props => {
       peekSize={peekSize}
       openSize={openSize}
       fixedLoc="bottom"
+      brand={getBrand()}
       onDrawerOpen={onDrawerOpen}
       onDrawerPeek={onDrawerPeek}
       isInitialPeek={isInitialPeek}

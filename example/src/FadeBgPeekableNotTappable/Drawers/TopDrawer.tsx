@@ -11,6 +11,7 @@
 import * as React from 'react';
 import {SlidingDrawer} from '../../react-native-sliding-drawer';
 import {TopDrawerContent} from '../../DrawerContent/index';
+import {getBrand} from 'react-native-device-info';
 
 /**
  * Example for a top drawer
@@ -24,6 +25,7 @@ export const TopDrawer: React.FC = () => {
       peekSize={peekSize}
       openSize={openSize}
       fixedLoc="top"
+      brand={getBrand()}
       enableFadeBackground={true}>
       <TopDrawerContent peekSize={peekSize} />
     </SlidingDrawer>

@@ -11,6 +11,7 @@
 import * as React from 'react';
 import {SlidingDrawer} from '../../react-native-sliding-drawer';
 import {BottomDrawerContent} from '../../DrawerContent/index';
+import {getBrand} from 'react-native-device-info';
 
 /**
  * Example for a bottom drawer
@@ -24,6 +25,7 @@ export const BottomDrawer: React.FC = () => {
       peekSize={peekSize}
       openSize={openSize}
       fixedLoc="bottom"
+      brand={getBrand()}
       enableFadeBackground={true}>
       <BottomDrawerContent peekSize={peekSize} />
     </SlidingDrawer>
