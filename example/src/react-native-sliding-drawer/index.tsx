@@ -15,6 +15,7 @@ type PropsT = {
   peekSize: number; // peek state width or height.
   openSize: number; // open state width or height.
   fixedLoc: 'top' | 'bottom' | 'left' | 'right'; // Where the drawer is fixed at. Top drawer means sliding downwards, bottom upwards, left rightwards, right leftwards.
+  brand?: string; // brand name of the device. Android only
   drawerWidth?: number; // manual override of drawer width, applicable when fixedLoc === 'top' | 'bottom'
   drawerHeight?: number; // manual override of drawer height, applicable when fixedLoc === 'right' | 'left'
   screenWidth?: number; // width of the screen. Default to -1, i.e. using the value in react native's useWindowDimensions
@@ -45,6 +46,7 @@ export const SlidingDrawer: React.FC<PropsT> = props => {
     peekSize,
     openSize,
     fixedLoc,
+    brand = '',
     drawerWidth = -1,
     drawerHeight = -1,
     screenWidth = -1,
@@ -87,14 +89,25 @@ export const SlidingDrawer: React.FC<PropsT> = props => {
   const isVertical = ['top', 'bottom'].includes(fixedLoc);
   const size = isVertical ? height : width;
   // NOTE: bottomBarCorrection are needed specifically to handle
-  // Android devices, where the bottomBarCorrection must be deducted when computing
-  // the positioning of the drawer using `top` or `bottom` prop. iOS does not
-  // seem to suffer from this problem. Hence for iOS, bottomBarCorrection is 0
-  // (because in iOS StatusBar.currentHeight returns null)
-  const bottomBarCorrection =
-    Dimensions.get('screen').height -
-    height -
-    (StatusBar.currentHeight ? StatusBar.currentHeight : 0);
+  // different Android devices. bottomBarCorrection must be computed when
+  // computing the positioning of the drawer using `top` or `bottom` prop.
+  // iOS does not seem to suffer from this problem. Hence for iOS,
+  // bottomBarCorrection is 0.
+  let bottomBarCorrection: number;
+  switch (brand) {
+    case 'samsung':
+      bottomBarCorrection = 0;
+      break;
+    case 'google':
+      bottomBarCorrection =
+        Dimensions.get('screen').height -
+        height -
+        (StatusBar.currentHeight ? StatusBar.currentHeight : 0);
+      break;
+    default:
+      bottomBarCorrection = 0;
+      break;
+  }
 
   if (maxPct * size < openSize || openSize < peekSize) {
     throw new Error(

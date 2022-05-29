@@ -10,9 +10,10 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
-    "@fanchenbao/react-native-sliding-drawer": "file:../fanchenbao-react-native-sliding-drawer-0.4.1.tgz",
+    "@fanchenbao/react-native-sliding-drawer": "file:../fanchenbao-react-native-sliding-drawer-0.4.2.tgz",
     "react": "17.0.2",
-    "react-native": "0.66.4"
+    "react-native": "0.66.4",
+    "react-native-device-info": "^8.7.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

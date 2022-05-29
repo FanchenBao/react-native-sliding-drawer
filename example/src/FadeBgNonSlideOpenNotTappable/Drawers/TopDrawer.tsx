@@ -11,6 +11,7 @@
 import * as React from 'react';
 import {SlidingDrawer} from '../../react-native-sliding-drawer';
 import {TopDrawerContent} from '../../DrawerContent/index';
+import {getBrand} from 'react-native-device-info';
 
 type PropsT = {
   onDrawerPeek: () => void;
@@ -37,6 +38,7 @@ export const TopDrawer: React.FC<PropsT> = props => {
       peekSize={peekSize}
       openSize={openSize}
       fixedLoc="top"
+      brand={getBrand()}
       onDrawerPeek={onDrawerPeek}
       enableNonSlideOpen={true}
       nonSlideOpen={nonSlideOpen}

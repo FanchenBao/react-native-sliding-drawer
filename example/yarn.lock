@@ -1062,10 +1062,10 @@
     "minimatch" "^3.0.4"
     "strip-json-comments" "^3.1.1"
 
-"@fanchenbao/react-native-sliding-drawer@file:../fanchenbao-react-native-sliding-drawer-0.4.1.tgz":
-  "integrity" "sha512-W+EfcTamPcNC1IMDCrOWn5KGfnp4NUUK2oAY6PuCDOaM1OwwG+wktYUgdoOEUfleQ9PKkJBfLw06HtLIXEIyYg=="
-  "resolved" "file:../fanchenbao-react-native-sliding-drawer-0.4.1.tgz"
-  "version" "0.4.1"
+"@fanchenbao/react-native-sliding-drawer@file:../fanchenbao-react-native-sliding-drawer-0.4.2.tgz":
+  "integrity" "sha512-2ZHEHwSDK/45vdhVXC5jrFa8cssAVHp6EEIm9rqjm5DkHZ7u1uwNXPo4bMOPi/y6ysHQAJlbZhS3g0h2Vk5ZIg=="
+  "resolved" "file:../fanchenbao-react-native-sliding-drawer-0.4.2.tgz"
+  "version" "0.4.2"
 
 "@hapi/hoek@^9.0.0":
   "integrity" "sha512-gfta+H8aziZsm8pZa0vj04KO6biEiisppNgA1kbJvFrrWu9Vm7eaUEy76DIxsuTaWvti5fkJVhllWc6ZTE+Mdw=="
@@ -5879,6 +5879,11 @@
     "flow-parser" "^0.121.0"
     "jscodeshift" "^0.11.0"
     "nullthrows" "^1.1.1"
+
+"react-native-device-info@^8.7.1":
+  "integrity" "sha512-cVMZztFa2Qn6qpQa601W61CtUwZQ1KXfqCOeltejAWEXmgIWivC692WGSdtGudj4upSi1UgMSaGcvKjfcpdGjg=="
+  "resolved" "https://registry.npmjs.org/react-native-device-info/-/react-native-device-info-8.7.1.tgz"
+  "version" "8.7.1"
 
 "react-native@*", "react-native@0.66.4":
   "integrity" "sha512-9vx5dlSfQlKbbDtr8+xMon6qsmSu7jvjdXWZpEKh3XVKpUidbbODv7048gwVKX8YAel1egeR7hN8vzSeI6ssTw=="
