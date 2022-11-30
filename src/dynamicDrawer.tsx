@@ -35,6 +35,7 @@ type PropsT = {
   onFadeBackgroundPress: () => void; // callback when the fade in background is pressed.
   elevation: number; // Android only. Defines z-order for overlapping views. The higher the value, the more on-top a component is.
   style: ViewStyle; // custom styles of the sliding window.
+  children?: React.ReactNode | React.ReactNode[];
 };
 
 /**

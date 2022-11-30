@@ -10,6 +10,7 @@ import {View, ViewStyle} from 'react-native';
 
 type PropsT = {
   style: ViewStyle; // custom styles of the sliding window.
+  children?: React.ReactNode | React.ReactNode[];
 };
 
 /**

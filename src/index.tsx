@@ -35,6 +35,7 @@ type PropsT = {
   maxFadeBackgroundOpacity?: number; // The max opacity of the fade in background
   onFadeBackgroundPress?: () => void; // callback when the fade in background is pressed.
   elevation?: number; // Android only. Defines z-order for overlapping views. The higher the value, the more on-top a component is.
+  children?: React.ReactNode | React.ReactNode[];
 };
 
 /**
