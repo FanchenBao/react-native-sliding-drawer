@@ -1,4 +1,4 @@
-# Peekable
+# Scrollable
 
 [Source code](../../example/src/Scrollable)
 
