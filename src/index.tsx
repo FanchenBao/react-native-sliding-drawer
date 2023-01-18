@@ -34,6 +34,8 @@ type PropsT = {
   enableFadeBackground?: boolean; // A flag indicating whether a fade in background is visible upon drawer open
   maxFadeBackgroundOpacity?: number; // The max opacity of the fade in background
   onFadeBackgroundPress?: () => void; // callback when the fade in background is pressed.
+  nonSlideableXRanges?: Array<Array<number>>; // an array of x-coord ranges [a, b] to specify that when the drawer is open and horizontal sliding event happens in those ranges, the slide is ignored by the sliding drawer and recognized by whatever children underneath. Use this to implement ScrollView inside a sliding drawer. These ranges are ignored when the drawer is in its peek state.
+  nonSlideableYRanges?: Array<Array<number>>; // same as nonSlideableXranges, except for y-coord
   elevation?: number; // Android only. Defines z-order for overlapping views. The higher the value, the more on-top a component is.
   children?: React.ReactNode | React.ReactNode[];
 };
@@ -72,6 +74,8 @@ export const SlidingDrawer: React.FC<PropsT> = props => {
     onFadeBackgroundPress = () => {
       // Default no-op function
     },
+    nonSlideableXRanges = [],
+    nonSlideableYRanges = [],
     elevation = 200, // A very big elevation, should guarantee the drawer is on top of everything else
   } = props;
 
@@ -178,6 +182,8 @@ export const SlidingDrawer: React.FC<PropsT> = props => {
       enableFadeBackground={enableFadeBackground}
       maxFadeBackgroundOpacity={maxFadeBackgroundOpacity}
       onFadeBackgroundPress={onFadeBackgroundPress}
+      nonSlideableXRanges={nonSlideableXRanges}
+      nonSlideableYRanges={nonSlideableYRanges}
       elevation={elevation}
       style={getStyles()}>
       {children}

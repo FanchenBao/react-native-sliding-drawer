@@ -20,6 +20,7 @@ import {Peekable} from './src/Peekable';
 import {FadeBgNonSlideOpenNotTappable} from './src/FadeBgNonSlideOpenNotTappable';
 import {FadeBgTappable} from './src/FadeBgTappable';
 import {FadeBgPeekableNotTappable} from './src/FadeBgPeekableNotTappable';
+import {Scrollable} from './src/Scrollable';
 
 const App = () => {
   const demos = {
@@ -28,9 +29,10 @@ const App = () => {
     FadeBgPeekableNotTappable: <FadeBgPeekableNotTappable />,
     FadeBgNonSlideOpenNotTappable: <FadeBgNonSlideOpenNotTappable />,
     FadeBgTappable: <FadeBgTappable />,
+    Scrollable: <Scrollable />,
   };
   const [selectedDemo, setSelectedDemo] =
-    React.useState<keyof typeof demos>('Peekable');
+    React.useState<keyof typeof demos>('Scrollable');
   return (
     <View
       style={{

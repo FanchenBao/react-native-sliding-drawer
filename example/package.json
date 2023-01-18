@@ -4,13 +4,12 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
-    "ios": "react-native run-ios",
+    "ios": "react-native run-ios --simulator='iPhone 14'",
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
-    "@fanchenbao/react-native-sliding-drawer": "file:../fanchenbao-react-native-sliding-drawer-0.4.2.tgz",
     "react": "17.0.2",
     "react-native": "0.66.4",
     "react-native-device-info": "^8.7.1"

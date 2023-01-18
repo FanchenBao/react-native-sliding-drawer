@@ -33,6 +33,8 @@ type PropsT = {
   enableFadeBackground: boolean; // A flag indicating whether a fade in background is visible upon drawer open
   maxFadeBackgroundOpacity: number; // The max opacity of the fade in background
   onFadeBackgroundPress: () => void; // callback when the fade in background is pressed.
+  nonSlideableXRanges: Array<Array<number>>; // an array of x-coord ranges [a, b] to specify that when the drawer is open and horizontal sliding event happens in those ranges, the slide is ignored by the sliding drawer and recognized by whatever children underneath. Use this to implement ScrollView inside a sliding drawer. These ranges are ignored when the drawer is in its peek state.
+  nonSlideableYRanges: Array<Array<number>>; // same as nonSlideableXranges, except for y-coord
   elevation: number; // Android only. Defines z-order for overlapping views. The higher the value, the more on-top a component is.
   style: ViewStyle; // custom styles of the sliding window.
   children?: React.ReactNode | React.ReactNode[];
@@ -64,6 +66,8 @@ export const DynamicDrawer: React.FC<PropsT> = props => {
     enableFadeBackground,
     maxFadeBackgroundOpacity,
     onFadeBackgroundPress,
+    nonSlideableXRanges,
+    nonSlideableYRanges,
     elevation,
     style,
   } = props;
@@ -176,8 +180,44 @@ export const DynamicDrawer: React.FC<PropsT> = props => {
 
   const panResponder = React.useRef(
     PanResponder.create({
-      onMoveShouldSetPanResponder: (_, {dx, dy}) =>
-        Math.abs(isVertical ? dy : dx) >= 10, // enable pan only if there is sufficient finger movement
+      onMoveShouldSetPanResponder: (_, {dx, dy, moveX, moveY}) => {
+        // @ts-ignore: _value is not exposed to typescript
+        if (state._value !== DrawerState.Peek) {
+          // Handle regions where sliding drawer's pan responder shall be
+          // disabled based on the input nonSlideableXRanges and
+          // nonSlideableYRanges.
+          // This is useful if one needs to include a scroll view in the
+          // sliding drawer. By matching the nonSlideableXRanges and
+          // nonSlideableYRanges to the scroll view, sliding drawer
+          // ignores the sliding while scroll view would pick it up.
+          if (
+            nonSlideableXRanges.length > 0 &&
+            nonSlideableYRanges.length > 0
+          ) {
+            // If both x and y ranges are given, the only region to ignore
+            // sliding is within the given ranges.
+            if (
+              nonSlideableYRanges.some(
+                ([lo, hi]) => lo <= moveY && moveY <= hi,
+              ) &&
+              nonSlideableXRanges.some(([lo, hi]) => lo <= moveX && moveX <= hi)
+            ) {
+              return false;
+            }
+          } else if (
+            nonSlideableYRanges.some(
+              ([lo, hi]) => lo <= moveY && moveY <= hi,
+            ) ||
+            nonSlideableXRanges.some(([lo, hi]) => lo <= moveX && moveX <= hi)
+          ) {
+            // If only one of the ranges are given or neither is given,
+            // matching only one of the ranges suffices
+            return false;
+          }
+        }
+
+        return Math.abs(isVertical ? dy : dx) >= 10; // enable pan only if there is sufficient finger movement
+      },
       onPanResponderGrant: () => {
         // NOTE: It is paramount that we use extractOffset() instead of
         // setOffset(deltaXY._value), because setOffset(deltaXY._value) retains
