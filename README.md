@@ -67,6 +67,8 @@ export default App;
 
 * [FadeBgTappable](./docs/demos/fadeBgTappable.md)
 
+* [Scrollable](./docs/demos/scrollable.md)
+
 
 ## Run Comprehensive Examples
 
@@ -122,6 +124,8 @@ The example app is running from [`./example/App.tsx`](./example/App.tsx)
 | `enableFadeBackground`     | `boolean`                                | `false`    | A flag indicating whether a fade in background is visible upon drawer movement. Specifically, as the drawer opens, the background darkens; as the drawer closes, the background brightens.     |
 | `maxFadeBackgroundOpacity` | `number`                                 | `0.5`      | Max opacity the background reaches when the drawer is in the open state. Applicable only when `enableFadeBackground` is set to true. Default to 0.5.                                           |
 | `onFadeBackgroundPress`    | `() => void`                             | `() => {}` | A callback function when the fade background is pressed after the drawer is in the open state. Applicable only when `enableFadeBackground` is set to true. Default to a no-operation function. |
+| `nonSlideableXRanges`      | `Array<Array<number>>`                   | `[]`       | An array of x-coord ranges `[[a1, b1], [a2, b2], ...]` to specify within which x-coord ranges the sliding event of the sliding drawer shall be ignored. Use this prop if one wishes to include a horizontal scrolling view (e.g., `ScrollView`, `FlatList`, etc.) in a horizontal sliding drawer. If these ranges are not given, any horizontal sliding events will be captured by the sliding drawer, and thus ignored by the scrolling view. By supplying these ranges, the sliding event will be ignored by the sliding drawer and picked up by the scrolling view underneath. These ranges are ignored when the drawer is in its peek state. Default to empty array, which means NO x-coord range is ignored. For details, refer to the [doc](./docs/demos/scrollable.md)|
+| `nonSlideableYRanges`      | `Array<Array<number>>`                   | `[]`       | An array of y-coord ranges `[[c1, d1], [c2, d2], ...]` to specify within which y-coord ranges the sliding event of the sliding drawer shall be ignored. It functions exactly the same as `nonSlideableXRanges`, except for y-coords. Ignored when the drawer is in its peek state. Default to empty array, which means NO y-coord range is ignored. For details, refer to the [doc](./docs/demos/scrollable.md)|
 | `elevation`    | `number`                             | `200` | Android only. It defines z-order of the drawer. The higher the value, the more on-top the drawer is. Default to 200, which is a very big elevation and should guarantee the drawer is on top of everything else. |
 
 ## Caveats

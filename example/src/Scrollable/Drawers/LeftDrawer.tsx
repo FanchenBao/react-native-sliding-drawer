@@ -27,8 +27,6 @@ export const LeftDrawer: React.FC = () => {
   // scroll view
   const [scrollPageY, setScrollPageY] = React.useState<number>(-1);
 
-  console.log(scrollPageX, scrollPageY);
-
   // Double rendering, a common trick to pre-render a fake sliding drawer to
   // measure the positioning of the desired components and then render the real
   // sliding drawer with the pre-measured positions. This is a necessary trick
