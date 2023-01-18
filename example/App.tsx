@@ -32,7 +32,7 @@ const App = () => {
     Scrollable: <Scrollable />,
   };
   const [selectedDemo, setSelectedDemo] =
-    React.useState<keyof typeof demos>('Scrollable');
+    React.useState<keyof typeof demos>('Peekable');
   return (
     <View
       style={{
