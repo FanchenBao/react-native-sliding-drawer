@@ -32,10 +32,10 @@ Before releasing the package, one must test whether the package can be successfu
 npm pack
 ```
 
-This packages the compiled code int a `react-native-sliding-drawer-x.x.x.tgz` file, where `x.x.x` is the version number. To install it, go to the `example` folder and run:
+This packages the compiled code int a `fanchenbao-react-native-sliding-drawer-x.x.x.tgz` file, where `x.x.x` is the version number. To install it, go to the `example` folder and run:
 
 ```sh
-npm install ../react-native-sliding-drawer-x.x.x.tgz
+npm install ../fanchenbao-react-native-sliding-drawer-x.x.x.tgz
 ```
 
 Then in the example app, we can use sliding drawer by importing it directly from `node_modules`:
