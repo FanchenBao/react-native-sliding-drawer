@@ -6,7 +6,7 @@
  */
 
 import * as React from 'react';
-import {useWindowDimensions, Dimensions, StatusBar} from 'react-native';
+import {useWindowDimensions, StatusBar} from 'react-native';
 import {DynamicDrawer} from './dynamicDrawer';
 import {StaticDrawer} from './staticDrawer';
 
@@ -93,24 +93,18 @@ export const SlidingDrawer: React.FC<PropsT> = props => {
   const width = screenWidth < 0 ? windowDim.width : screenWidth;
   const isVertical = ['top', 'bottom'].includes(fixedLoc);
   const size = isVertical ? height : width;
-  // NOTE: bottomBarCorrection are needed specifically to handle
-  // different Android devices. bottomBarCorrection must be computed when
+  // NOTE: vertCorrection are needed specifically to handle
+  // different Android devices. vertCorrection must be computed when
   // computing the positioning of the drawer using `top` or `bottom` prop.
   // iOS does not seem to suffer from this problem. Hence for iOS,
-  // bottomBarCorrection is 0.
-  let bottomBarCorrection: number;
+  // vertCorrection is 0.
+  let vertCorrection: number;
   switch (brand) {
-    case 'samsung':
-      bottomBarCorrection = 0;
-      break;
     case 'google':
-      bottomBarCorrection =
-        Dimensions.get('screen').height -
-        height -
-        (StatusBar.currentHeight ? StatusBar.currentHeight : 0);
+      vertCorrection = StatusBar.currentHeight ? StatusBar.currentHeight : 0;
       break;
     default:
-      bottomBarCorrection = 0;
+      vertCorrection = 0;
       break;
   }
 
@@ -128,7 +122,7 @@ export const SlidingDrawer: React.FC<PropsT> = props => {
           width: drawerWidth < 0 ? width : drawerWidth,
           bottom:
             size -
-            bottomBarCorrection -
+            vertCorrection -
             (isInitialPeek ? DrawerState.Peek : DrawerState.Open),
           elevation: elevation,
         };
@@ -138,7 +132,7 @@ export const SlidingDrawer: React.FC<PropsT> = props => {
           width: drawerWidth < 0 ? width : drawerWidth,
           top:
             size -
-            bottomBarCorrection -
+            vertCorrection -
             (isInitialPeek ? DrawerState.Peek : DrawerState.Open),
           elevation: elevation,
         };
